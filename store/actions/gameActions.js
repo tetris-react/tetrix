@@ -1,9 +1,26 @@
 import { spawnTetrad } from '../index';
 export const START_GAME = 'START_GAME';
+export const GAME_OVER = 'GAME_OVER';
+export const RESTART_GAME = 'RESTART_GAME';
 export const CALCULATE_SCORE = 'CALCULATE_SCORE';
 
 export const startGame = () => dispatch => {
   dispatch({ type: START_GAME });
+  dispatch(spawnTetrad());
+};
+
+export const restartGame = () => (dispatch, state) => {
+  let { score, topScore } = state().game;
+
+  topScore = score > topScore ? score : topScore;
+
+  dispatch({
+    type: RESTART_GAME,
+    payload: {
+      topScore
+    }
+  });
+
   dispatch(spawnTetrad());
 };
 
