@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   calculateScore,
   checkIfBlocked,
+  checkSpawnCollision,
   collapseEmptyRows,
   moveTetrad,
   spawnTetrad
@@ -31,6 +32,7 @@ const Playfield = () => {
   );
 
   useInterval(() => {
+    dispatch(checkSpawnCollision());
     dispatch(checkIfBlocked());
     dispatch(moveTetrad(DOWN));
   }, frameRate);
