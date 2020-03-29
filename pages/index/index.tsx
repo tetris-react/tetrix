@@ -2,7 +2,8 @@ import { useSelector } from 'react-redux';
 import StartGameModal from '../../game/components/modals/StartGameModal';
 import Playfield from '../../game/components/playfield/Playfield';
 import ScoreBoard from '../../game/components/score/ScoreBoard';
-import { AppContainer, Column as PlaceHolder } from '../../game/styles';
+import Statistics from '../../game/components/stats/Statistics';
+import { AppContainer } from '../../game/styles';
 
 function Index() {
   const { gameStarted } = useSelector((state: any) => state.game);
@@ -11,7 +12,7 @@ function Index() {
   return (
     <AppContainer>
       {!gameStarted && <StartGameModal />}
-      <PlaceHolder />
+      <Statistics />
       <Playfield />
       <ScoreBoard />
     </AppContainer>
