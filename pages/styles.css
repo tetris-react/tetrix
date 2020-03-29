@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+@import '../node_modules/normalize.css/normalize.css';
+
+html {
+  font-family: 'Righteous', cursive;
+  background: #212121;
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
