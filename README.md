@@ -5,6 +5,6 @@
 
 ## Code Climate
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/2bfb6727f6693f048060/maintainability)](https://codeclimate.com/github/dave-vazquez/tetris/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3080fb70f7a4b9a1a0ea/maintainability)](https://codeclimate.com/github/tetris-react/tetrix/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2bfb6727f6693f048060/test_coverage)](https://codeclimate.com/github/dave-vazquez/tetris/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3080fb70f7a4b9a1a0ea/test_coverage)](https://codeclimate.com/github/tetris-react/tetrix/test_coverage)
