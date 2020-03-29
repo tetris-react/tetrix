@@ -9,10 +9,10 @@ export const Cell = props => {
       isActive={props.isActive}
       color={props.color}
     >
-      {/* <span>{`(${props.coordinate.x}, ${props.coordinate.y})`}</span>
+      <span>{`(${props.coordinate.x}, ${props.coordinate.y})`}</span>
       <span>{`${props.isActive ? 'A' : '_'} · ${props.isLocked
         ? 'L'
-        : '_'}`}</span> */}
+        : '_'}`}</span>
     </Container>
   );
 };
@@ -28,7 +28,7 @@ const Container = styled.div`
   background-color: ${props =>
     (props.isLocked || props.isActive) && props.color};
 
-  color: ${props => (props.isLocked || props.isActive ? 'white' : 'black')};
+  color: ${props => (props.isLocked || props.isActive ? 'white' : '#CCCCCC')};
 
   box-shadow: 0px 0px 15px
     ${props =>
