@@ -3,13 +3,17 @@ import { useSelector } from 'react-redux';
 import { ScoreBoardContainer } from './styles/ScoreBoardContainer';
 
 const ScoreBoard = () => {
-  const { score, level, rowsCleared } = useSelector(state => state.game);
+  const { score, topScore, level, rowsCleared } = useSelector(
+    state => state.game
+  );
   return (
     <ScoreBoardContainer>
       <section>
         <div>
           <span>Top Score</span>
-          <span>0182725</span>
+          <span>
+            {topScore}
+          </span>
         </div>
         <hr />
         <div>
