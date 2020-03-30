@@ -1,3 +1,5 @@
+export const ONE_SECOND = 1000;
+
 // Matrix Dimensions
 export const NUM_ROWS = 20;
 export const NUM_COLS = 10;
