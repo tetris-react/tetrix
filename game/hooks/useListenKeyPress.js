@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { incrementAttack } from '../../store';
 import { DOWN, LEFT, RIGHT, ROTATE } from '../constants';
 
 const useListenKeyPress = callback => {
+  const dispatch = useDispatch();
   const keyDownHandler = e => {
     switch (e.keyCode) {
       case 40:
@@ -19,6 +22,8 @@ const useListenKeyPress = callback => {
       default:
         break;
     }
+
+    dispatch(incrementAttack());
   };
 
   useEffect(() => {
