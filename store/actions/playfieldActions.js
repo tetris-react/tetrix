@@ -86,7 +86,7 @@ export const deleteFilledRow = rowCoord => (dispatch, state) => {
       type: DELETE_ROW,
       payload: {
         matrix: matrix,
-        rowCoord
+        deletedRow: rowCoord
       }
     });
   }
