@@ -1,13 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Timer from './Timer';
 import { ScoreBoardContainer } from './styles/ScoreBoardContainer';
 
 const ScoreBoard = () => {
-  const { score, topScore, level, rowsCleared } = useSelector(
+  const { score, topScore, level, rowsCleared, aps, tps } = useSelector(
     state => state.game
   );
   return (
     <ScoreBoardContainer>
+      <Timer />
       <section>
         <div>
           <span>Top Score</span>
@@ -51,12 +53,16 @@ const ScoreBoard = () => {
 
       <section>
         <div>
-          <span>APM - (Attack / min)</span>
-          <span>148.02</span>
+          <span>APS - (Attack / sec)</span>
+          <span>
+            {aps}
+          </span>
         </div>
         <div>
-          <span>PPM - (Pieces Process / min)</span>
-          <span>26.46</span>
+          <span>TPS - (Tetrads Processed / sec)</span>
+          <span>
+            {tps}
+          </span>
         </div>
       </section>
     </ScoreBoardContainer>
