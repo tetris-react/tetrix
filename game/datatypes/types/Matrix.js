@@ -98,7 +98,6 @@ Matrix.prototype.collisionAtSpawn = function() {
   let topRows = [...this.matrix[0], ...this.matrix[1]];
   let collisionDetected = false;
   topRows.forEach(cell => {
-    console.log('cell', cell.x, cell.y, cell.isActive, cell.isLocked);
     if (cell.isActive && cell.isLocked) {
       collisionDetected = true;
     }
