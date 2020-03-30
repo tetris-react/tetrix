@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { StatisticsContainer } from './styles/StatisticsContainer';
 
 const Statistics = () => {
+  const { tetradCount } = useSelector(state => state.game);
   return (
     <StatisticsContainer>
       <section>
@@ -14,31 +16,45 @@ const Statistics = () => {
       </section>
       <div>
         <span>T</span>
-        <span>0</span>
+        <span>
+          {tetradCount['T']}
+        </span>
       </div>
       <div>
         <span>Z</span>
-        <span>0</span>
+        <span>
+          {tetradCount['Z']}
+        </span>
       </div>
       <div>
         <span>S</span>
-        <span>0</span>
+        <span>
+          {tetradCount['S']}
+        </span>
       </div>
       <div>
         <span>I</span>
-        <span>0</span>
+        <span>
+          {tetradCount['I']}
+        </span>
       </div>
       <div>
         <span>J</span>
-        <span>0</span>
+        <span>
+          {tetradCount['J']}
+        </span>
       </div>
       <div>
         <span>O</span>
-        <span>0</span>
+        <span>
+          {tetradCount['O']}
+        </span>
       </div>
       <div>
         <span>L</span>
-        <span>0</span>
+        <span>
+          {tetradCount['L']}
+        </span>
       </div>
     </StatisticsContainer>
   );
