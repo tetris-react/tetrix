@@ -19,5 +19,11 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "knexfile.js",
+    "lib/resolvers.js",
+    "data/config.js"
+  ]
 }

@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
-import StartGameModal from '../../game/components/modals/StartGameModal';
-import Playfield from '../../game/components/playfield/Playfield';
-import ScoreBoard from '../../game/components/score/ScoreBoard';
-import { AppContainer, Column as PlaceHolder } from '../../game/styles';
+import { useSelector } from "react-redux";
+import StartGameModal from "../../game/components/modals/StartGameModal";
+import Playfield from "../../game/components/playfield/Playfield";
+import ScoreBoard from "../../game/components/score/ScoreBoard";
+import { AppContainer, Column as PlaceHolder } from "../../game/styles";
+import withApollo from "../../lib/with-apollo";
 
 function Index() {
   const { gameStarted } = useSelector((state: any) => state.game);
@@ -18,4 +19,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default withApollo(Index);
