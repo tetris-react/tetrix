@@ -13,7 +13,15 @@ export default combineReducers({
 /********************************************************
 *                     ACTION CREATORS                   *
 ********************************************************/
-export { startGame, calculateScore, restartGame } from './actions/gameActions';
+export {
+  startGame,
+  calculateScore,
+  restartGame,
+  incrementTime,
+  incrementAttack,
+  incrementTetrads
+} from './actions/gameActions';
+
 export {
   spawnTetrad,
   moveTetrad,
@@ -30,7 +38,10 @@ export {
   START_GAME,
   GAME_OVER,
   CALCULATE_SCORE,
-  RESTART_GAME
+  RESTART_GAME,
+  INCREMENT_TIME,
+  INCREMENT_ATTACK,
+  INCREMENT_TETRADS_PROCESSED
 } from './actions/gameActions';
 
 export {
