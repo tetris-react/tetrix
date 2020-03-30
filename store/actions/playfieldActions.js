@@ -1,6 +1,6 @@
 import { DOWN } from '../../game/constants';
 import { getRandomTetrad } from '../../game/datatypes/helper';
-import { GAME_OVER } from './gameActions';
+import { GAME_OVER, incrementTetrads } from './gameActions';
 export const SPAWN_TETRAD = 'SPAWN_TETRAD';
 export const MOVE_TETRAD = 'MOVE_TETRAD';
 export const TETRAD_LOCKED = 'TETRAD_LOCKED';
@@ -10,7 +10,6 @@ export const SPAWN_COLISSION_DETECTED = 'SPAWN_COLISSION_DETECTED';
 
 export const spawnTetrad = (lastType = '') => (dispatch, state) => {
   let { matrix, tetrad } = state().playfield;
-  console.log(matrix);
   tetrad = getRandomTetrad(lastType);
   matrix = matrix.activateCoordinates(tetrad);
 
@@ -21,6 +20,8 @@ export const spawnTetrad = (lastType = '') => (dispatch, state) => {
       tetrad: tetrad
     }
   });
+
+  dispatch(incrementTetrads());
 };
 
 export const moveTetrad = (direction = DOWN) => (dispatch, state) => {
@@ -85,7 +86,7 @@ export const deleteFilledRow = rowCoord => (dispatch, state) => {
       type: DELETE_ROW,
       payload: {
         matrix: matrix,
-        deletedRow: rowCoord
+        rowCoord
       }
     });
   }

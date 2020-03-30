@@ -3,6 +3,9 @@ export const START_GAME = 'START_GAME';
 export const GAME_OVER = 'GAME_OVER';
 export const RESTART_GAME = 'RESTART_GAME';
 export const CALCULATE_SCORE = 'CALCULATE_SCORE';
+export const INCREMENT_TIME = 'INCREMENT_TIME';
+export const INCREMENT_ATTACK = 'INCREMENT_ATTACK';
+export const INCREMENT_TETRADS_PROCESSED = 'INCREMENT_TETRADS_PROCESSED';
 
 export const startGame = () => dispatch => {
   dispatch({ type: START_GAME });
@@ -22,6 +25,45 @@ export const restartGame = () => (dispatch, state) => {
   });
 
   dispatch(spawnTetrad());
+};
+
+export const incrementTime = () => (dispatch, state) => {
+  let { attacks, aps, tetradsProcessed, tps, totalSeconds } = state().game;
+
+  aps = roundTwoDecimals(attacks / totalSeconds);
+  tps = roundTwoDecimals(tetradsProcessed / totalSeconds);
+  totalSeconds++;
+
+  function roundTwoDecimals(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
+  }
+
+  dispatch({
+    type: INCREMENT_TIME,
+    payload: {
+      aps,
+      tps,
+      totalSeconds
+    }
+  });
+};
+
+export const incrementAttack = () => (dispatch, state) => {
+  dispatch({ type: INCREMENT_ATTACK });
+};
+
+export const incrementTetrads = () => (dispatch, state) => {
+  let { tetrad } = state().playfield;
+  let { tetradCount } = state().game;
+
+  tetradCount[tetrad.type]++;
+
+  dispatch({
+    type: INCREMENT_TETRADS_PROCESSED,
+    payload: {
+      tetradCount
+    }
+  });
 };
 
 export const calculateScore = () => (dispatch, state) => {
