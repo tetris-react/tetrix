@@ -69,6 +69,7 @@ export const incrementTetrads = () => (dispatch, state) => {
 export const calculateScore = () => (dispatch, state) => {
   const numRows = state().playfield.deletedRows.length;
   let { rowsCleared, level, score } = state().game;
+  let { rowsSkipped } = state().playfield;
 
   const points =
     numRows === 0
@@ -76,7 +77,7 @@ export const calculateScore = () => (dispatch, state) => {
       : numRows === 1 ? 40 : numRows === 2 ? 100 : numRows === 3 ? 300 : 1200;
 
   rowsCleared += numRows;
-  score += points * (level + 1);
+  score += points * (level + 1) + rowsSkipped;
   level += rowsCleared >= level * 10 + 10 ? 1 : 0;
 
   dispatch({

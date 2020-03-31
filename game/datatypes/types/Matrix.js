@@ -1,4 +1,4 @@
-import { NUM_COLS, NUM_ROWS } from '../../constants';
+import { DOWN, NUM_COLS, NUM_ROWS } from '../../constants';
 import { deepCopy } from '../helper';
 import { Cell } from './Cell';
 
@@ -39,6 +39,12 @@ Matrix.prototype.activateCoordinates = function(tetrad) {
   });
 
   return this;
+};
+
+Matrix.prototype.deactivateCoordinates = function(tetrad) {
+  tetrad.coordinates.forEach(({ x, y }) => {
+    this.cellAt(x, y).deactivate();
+  });
 };
 
 Matrix.prototype.cellAt = function(x, y) {
@@ -130,4 +136,17 @@ Matrix.prototype.collapseEmptyRows = function(deletedRows) {
       });
     }
   }
+};
+
+Matrix.prototype.hardDrop = function(tetrad) {
+  let rowsSkipped = 0;
+  while (tetrad.canMove(DOWN, this)) {
+    tetrad.move(DOWN);
+    rowsSkipped++;
+  }
+
+  return {
+    rowsSkipped,
+    droppedTetrad: tetrad
+  };
 };

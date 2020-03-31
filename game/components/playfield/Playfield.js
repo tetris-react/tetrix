@@ -5,10 +5,11 @@ import {
   checkIfBlocked,
   checkSpawnCollision,
   collapseEmptyRows,
+  hardDropTetrad,
   moveTetrad,
   spawnTetrad
 } from '../../../store';
-import { DOWN } from '../../constants';
+import { DOWN, HARD_DROP } from '../../constants';
 import { useInterval, useListenKeyPress } from '../../hooks';
 import Row from './Row';
 import PlayFieldContainer from './styles/PlayFieldContainer';
@@ -38,7 +39,11 @@ const Playfield = () => {
   }, frameRate);
 
   useListenKeyPress(direction => {
-    dispatch(moveTetrad(direction));
+    if (direction === HARD_DROP) {
+      dispatch(hardDropTetrad());
+    } else {
+      dispatch(moveTetrad(direction));
+    }
   });
 
   return (

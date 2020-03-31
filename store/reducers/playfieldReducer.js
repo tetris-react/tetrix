@@ -5,6 +5,7 @@ import { RESTART_GAME } from '../actions/gameActions';
 import {
   COLLAPSE_ROWS,
   DELETE_ROW,
+  HARD_DROP_TETRAD,
   MOVE_TETRAD,
   SPAWN_COLISSION_DETECTED,
   SPAWN_TETRAD,
@@ -16,7 +17,8 @@ const initialState = {
   tetrad: new Tetrad(),
   tetradLocked: false,
   spawnCollisions: 0,
-  deletedRows: []
+  deletedRows: [],
+  rowsSkipped: 0
 };
 
 const playfieldReducer = (state = initialState, action) => {
@@ -26,6 +28,7 @@ const playfieldReducer = (state = initialState, action) => {
         ...state,
         matrix: action.payload.matrix,
         tetrad: action.payload.tetrad,
+        rowsSkipped: 0,
         tetradLocked: false
       };
     }
@@ -34,6 +37,14 @@ const playfieldReducer = (state = initialState, action) => {
         ...state,
         matrix: action.payload.matrix,
         tetrad: action.payload.tetrad
+      };
+    }
+    case HARD_DROP_TETRAD: {
+      return {
+        ...state,
+        matrix: action.payload.matrix,
+        tetrad: action.payload.tetrad,
+        rowsSkipped: action.payload.rowsSkipped
       };
     }
     case TETRAD_LOCKED:

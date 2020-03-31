@@ -1,30 +1,52 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { FRAME_RATE_MULTIPLIER } from '../constants';
+
 const useInterval = (callback, frameRate) => {
-  const savedCallback = useRef();
-  const { gameStarted } = useSelector(state => state.game);
-  // Remember the latest callback.
+  // state
+  const { gameStarted, gameOver } = useSelector(state => state.game);
+  // refs
+  const requestAFrameRef = useRef();
+  const callbackRef = useRef();
+  const frameRateRef = useRef();
+
+  let start = new Date().getTime();
+
+  const loop = () => {
+    let current = new Date().getTime();
+    let delta = current - start;
+    let delay = frameRateRef.current * FRAME_RATE_MULTIPLIER;
+
+    if (delta >= delay) {
+      callbackRef.current();
+      start = new Date().getTime();
+    }
+
+    requestAFrameRef.current = requestAnimationFrame(loop);
+  };
+
   useEffect(
     () => {
-      savedCallback.current = callback;
+      callbackRef.current = callback;
     },
     [callback]
   );
 
-  // Set up the interval.
   useEffect(
     () => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (gameStarted && frameRate !== null) {
-        const id = setInterval(tick, frameRate * 16.6666666667);
-        return () => {
-          clearInterval(id);
-        };
-      }
+      frameRateRef.current = frameRate;
     },
-    [frameRate, gameStarted]
+    [frameRate]
+  );
+
+  useEffect(
+    () => {
+      if (gameStarted) requestAFrameRef.current = requestAnimationFrame(loop);
+      if (gameOver) cancelAnimationFrame(requestAFrameRef.current);
+
+      return () => cancelAnimationFrame(requestAFrameRef.current);
+    },
+    [gameStarted, gameOver]
   );
 };
 

@@ -1,5 +1,5 @@
-export const ONE_SECOND = 1000;
-
+export const FPS_60 = 60;
+export const FRAME_RATE_MULTIPLIER = 16.6666666667;
 // Matrix Dimensions
 export const NUM_ROWS = 20;
 export const NUM_COLS = 10;
@@ -9,6 +9,9 @@ export const ROTATE = 'ROTATE';
 export const DOWN = 'DOWN';
 export const LEFT = 'LEFT';
 export const RIGHT = 'RIGHT';
+export const SOFT_DROP = 'SOFT_DROP';
+export const HARD_DROP = 'HARD_DROP';
+export const PAUSE = 'PAUSE';
 
 // Gravity - Or Frames/Gridcell/Level
 export const GRAVITY_00 = 48;
@@ -26,6 +29,8 @@ export const GRAVITY_13_15 = 4;
 export const GRAVITY_16_18 = 3;
 export const GRAVITY_19_28 = 2;
 export const GRAVITY_29_PLUS = 1;
+
+export const SOFT_DROP_RATE = 6;
 
 export const G = [
   GRAVITY_00,

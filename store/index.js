@@ -25,6 +25,7 @@ export {
 export {
   spawnTetrad,
   moveTetrad,
+  hardDropTetrad,
   deleteFilledRow,
   checkIfBlocked,
   collapseEmptyRows,
@@ -47,6 +48,7 @@ export {
 export {
   SPAWN_TETRAD,
   MOVE_TETRAD,
+  HARD_DROP_TETRAD,
   TETRAD_LOCKED,
   DELETE_ROW,
   COLLAPSE_ROWS,

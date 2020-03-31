@@ -3,6 +3,7 @@ import { getRandomTetrad } from '../../game/datatypes/helper';
 import { GAME_OVER, incrementTetrads } from './gameActions';
 export const SPAWN_TETRAD = 'SPAWN_TETRAD';
 export const MOVE_TETRAD = 'MOVE_TETRAD';
+export const HARD_DROP_TETRAD = 'HARD_DROP_TETRAD';
 export const TETRAD_LOCKED = 'TETRAD_LOCKED';
 export const DELETE_ROW = 'DELETE_ROW';
 export const COLLAPSE_ROWS = 'COLLAPSE_ROWS';
@@ -40,6 +41,26 @@ export const moveTetrad = (direction = DOWN) => (dispatch, state) => {
       }
     });
   }
+};
+
+export const hardDropTetrad = () => (dispatch, state) => {
+  let { matrix, tetrad } = state().playfield;
+
+  matrix.deactivateCoordinates(tetrad);
+
+  let { rowsSkipped, droppedTetrad } = matrix.hardDrop(tetrad);
+
+  tetrad = droppedTetrad;
+  matrix.activateCoordinates(tetrad);
+
+  dispatch({
+    type: HARD_DROP_TETRAD,
+    payload: {
+      matrix,
+      tetrad,
+      rowsSkipped
+    }
+  });
 };
 
 export const checkIfBlocked = (direction = DOWN) => (dispatch, state) => {
