@@ -4,7 +4,9 @@ import { FRAME_RATE_MULTIPLIER } from '../constants';
 
 const useInterval = (callback, frameRate) => {
   // state
-  const { gameStarted, gameOver } = useSelector(state => state.game);
+  const { gameStarted, gameOver, gamePaused } = useSelector(
+    state => state.game
+  );
   // refs
   const requestAFrameRef = useRef();
   const callbackRef = useRef();
@@ -42,11 +44,12 @@ const useInterval = (callback, frameRate) => {
   useEffect(
     () => {
       if (gameStarted) requestAFrameRef.current = requestAnimationFrame(loop);
-      if (gameOver) cancelAnimationFrame(requestAFrameRef.current);
+      if (gameOver || gamePaused)
+        cancelAnimationFrame(requestAFrameRef.current);
 
       return () => cancelAnimationFrame(requestAFrameRef.current);
     },
-    [gameStarted, gameOver]
+    [gameStarted, gameOver, gamePaused]
   );
 };
 
