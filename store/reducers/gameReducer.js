@@ -70,7 +70,15 @@ const gameReducer = (state = initialState, action) => {
     case RESTART_GAME:
       return {
         ...initialState,
-        tetradCount: { ...initialState.tetradCount },
+        tetradCount: {
+          T: 0,
+          Z: 0,
+          S: 0,
+          I: 0,
+          J: 0,
+          O: 0,
+          L: 0
+        }
         gameStarted: true,
         topScore: action.payload.topScore
       };
