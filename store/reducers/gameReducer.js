@@ -78,7 +78,7 @@ const gameReducer = (state = initialState, action) => {
           J: 0,
           O: 0,
           L: 0
-        }
+        },
         gameStarted: true,
         topScore: action.payload.topScore
       };
