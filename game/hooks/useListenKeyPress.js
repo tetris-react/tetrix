@@ -21,7 +21,7 @@ const useListenKeyPress = callback => {
         callback(RIGHT);
         break;
       case 32:
-        callback(HARD_DROP);
+        if (!e.repeat) callback(HARD_DROP);
         break;
       default:
         break;
