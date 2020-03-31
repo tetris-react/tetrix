@@ -13,24 +13,44 @@ export default combineReducers({
 /********************************************************
 *                     ACTION CREATORS                   *
 ********************************************************/
-export { startGame, calculateScore } from './actions/gameActions';
+export {
+  startGame,
+  calculateScore,
+  restartGame,
+  incrementTime,
+  incrementAttack,
+  incrementTetrads
+} from './actions/gameActions';
+
 export {
   spawnTetrad,
   moveTetrad,
+  hardDropTetrad,
   deleteFilledRow,
   checkIfBlocked,
-  collapseEmptyRows
+  collapseEmptyRows,
+  checkSpawnCollision
 } from './actions/playfieldActions';
 
 /********************************************************
 *                       ACTION TYPES                    *
 ********************************************************/
-export { START_GAME, CALCULATE_SCORE } from './actions/gameActions';
+export {
+  START_GAME,
+  GAME_OVER,
+  CALCULATE_SCORE,
+  RESTART_GAME,
+  INCREMENT_TIME,
+  INCREMENT_ATTACK,
+  INCREMENT_TETRADS_PROCESSED
+} from './actions/gameActions';
 
 export {
   SPAWN_TETRAD,
   MOVE_TETRAD,
+  HARD_DROP_TETRAD,
   TETRAD_LOCKED,
   DELETE_ROW,
-  COLLAPSE_ROWS
+  COLLAPSE_ROWS,
+  SPAWN_COLISSION_DETECTED
 } from './actions/playfieldActions';

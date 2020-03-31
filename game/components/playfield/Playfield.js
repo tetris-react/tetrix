@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   calculateScore,
   checkIfBlocked,
+  checkSpawnCollision,
   collapseEmptyRows,
+  hardDropTetrad,
   moveTetrad,
   spawnTetrad
 } from '../../../store';
-import { DOWN } from '../../constants';
+import { DOWN, HARD_DROP } from '../../constants';
 import { useInterval, useListenKeyPress } from '../../hooks';
 import Row from './Row';
 import PlayFieldContainer from './styles/PlayFieldContainer';
@@ -31,12 +33,18 @@ const Playfield = () => {
   );
 
   useInterval(() => {
+    dispatch(checkSpawnCollision());
     dispatch(checkIfBlocked());
     dispatch(moveTetrad(DOWN));
   }, frameRate);
 
   useListenKeyPress(direction => {
-    dispatch(moveTetrad(direction));
+    if (direction === HARD_DROP) {
+      dispatch(hardDropTetrad());
+      dispatch(checkIfBlocked());
+    } else {
+      dispatch(moveTetrad(direction));
+    }
   });
 
   return (

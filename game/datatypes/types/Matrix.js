@@ -1,4 +1,4 @@
-import { NUM_COLS, NUM_ROWS } from '../../constants';
+import { DOWN, NUM_COLS, NUM_ROWS } from '../../constants';
 import { deepCopy } from '../helper';
 import { Cell } from './Cell';
 
@@ -39,6 +39,12 @@ Matrix.prototype.activateCoordinates = function(tetrad) {
   });
 
   return this;
+};
+
+Matrix.prototype.deactivateCoordinates = function(tetrad) {
+  tetrad.coordinates.forEach(({ x, y }) => {
+    this.cellAt(x, y).deactivate();
+  });
 };
 
 Matrix.prototype.cellAt = function(x, y) {
@@ -94,6 +100,18 @@ Matrix.prototype.deleteRows = function(rows) {
   return this;
 };
 
+Matrix.prototype.collisionAtSpawn = function() {
+  let topRows = [...this.matrix[0], ...this.matrix[1]];
+  let collisionDetected = false;
+  topRows.forEach(cell => {
+    if (cell.isActive && cell.isLocked) {
+      collisionDetected = true;
+    }
+  });
+
+  return collisionDetected;
+};
+
 Matrix.prototype.collapseEmptyRows = function(deletedRows) {
   let remainingRows = this.matrix.filter((_, y) => {
     return !deletedRows.includes(y);
@@ -118,4 +136,17 @@ Matrix.prototype.collapseEmptyRows = function(deletedRows) {
       });
     }
   }
+};
+
+Matrix.prototype.hardDrop = function(tetrad) {
+  let rowsSkipped = 0;
+  while (tetrad.canMove(DOWN, this)) {
+    tetrad.move(DOWN);
+    rowsSkipped++;
+  }
+
+  return {
+    rowsSkipped,
+    droppedTetrad: tetrad
+  };
 };
