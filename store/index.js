@@ -15,6 +15,8 @@ export default combineReducers({
 ********************************************************/
 export {
   startGame,
+  pauseGame,
+  resumeGame,
   calculateScore,
   restartGame,
   incrementTime,
@@ -37,6 +39,8 @@ export {
 ********************************************************/
 export {
   START_GAME,
+  PAUSE_GAME,
+  RESUME_GAME,
   GAME_OVER,
   CALCULATE_SCORE,
   RESTART_GAME,
