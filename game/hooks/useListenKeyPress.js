@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { hardDropTetrad, incrementAttack } from '../../store';
-import { DOWN, HARD_DROP, LEFT, RIGHT, ROTATE } from '../constants';
+import { DOWN, HARD_DROP, LEFT, PAUSE, RIGHT, ROTATE } from '../constants';
 
 const useListenKeyPress = callback => {
   const dispatch = useDispatch();
 
   const keyDownHandler = e => {
+    console.log(e.keyCode);
     switch (e.keyCode) {
       case 40:
         callback(DOWN);
@@ -22,6 +23,9 @@ const useListenKeyPress = callback => {
         break;
       case 32:
         if (!e.repeat) callback(HARD_DROP);
+        break;
+      case 80:
+        if (!e.repeat) callback(PAUSE);
         break;
       default:
         break;
