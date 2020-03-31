@@ -101,7 +101,7 @@ Matrix.prototype.deleteRows = function(rows) {
 };
 
 Matrix.prototype.collisionAtSpawn = function() {
-  let topRows = [...this.matrix[0], ...this.matrix[1]];
+  let topRows = [...this.matrix[2], ...this.matrix[3]];
   let collisionDetected = false;
   topRows.forEach(cell => {
     if (cell.isActive && cell.isLocked) {
@@ -116,9 +116,9 @@ Matrix.prototype.collapseEmptyRows = function(deletedRows) {
   let remainingRows = this.matrix.filter((_, y) => {
     return !deletedRows.includes(y);
   });
-  let offset = 20 - remainingRows.length;
+  let offset = 22 - remainingRows.length;
 
-  for (let y = 19; y >= 0; y--) {
+  for (let y = 21; y >= 0; y--) {
     if (remainingRows[y - offset]) {
       this.matrix[y] = this.matrix[y].map((cell, x) => {
         let remianingCell = deepCopy(remainingRows[y - offset][x]);
