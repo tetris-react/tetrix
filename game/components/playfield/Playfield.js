@@ -34,7 +34,6 @@ const Playfield = () => {
   );
 
   useInterval(() => {
-    dispatch(checkSpawnCollision());
     dispatch(checkIfBlocked());
     dispatch(moveTetrad(DOWN));
   }, frameRate);
