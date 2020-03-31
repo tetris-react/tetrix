@@ -5,11 +5,14 @@ import {
   INCREMENT_ATTACK,
   INCREMENT_TETRADS_PROCESSED,
   INCREMENT_TIME,
+  PAUSE_GAME,
   RESTART_GAME,
+  RESUME_GAME,
   START_GAME
 } from '../index';
 const initialState = {
   gameStarted: false,
+  gamePaused: false,
   gameOver: false,
   frameRate: G[0],
   rowsCleared: 0,
@@ -40,6 +43,16 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         gameStarted: true
+      };
+    case PAUSE_GAME:
+      return {
+        ...state,
+        gamePaused: true
+      };
+    case RESUME_GAME:
+      return {
+        ...state,
+        gamePaused: false
       };
     case INCREMENT_TIME:
       return {
