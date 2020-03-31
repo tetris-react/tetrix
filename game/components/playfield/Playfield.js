@@ -7,9 +7,10 @@ import {
   collapseEmptyRows,
   hardDropTetrad,
   moveTetrad,
+  pauseGame,
   spawnTetrad
 } from '../../../store';
-import { DOWN, HARD_DROP, NUM_ROWS } from '../../constants';
+import { DOWN, HARD_DROP, NUM_ROWS, PAUSE } from '../../constants';
 import { useInterval, useListenKeyPress } from '../../hooks';
 import Row from './Row';
 import PlayFieldContainer from './styles/PlayFieldContainer';
@@ -42,6 +43,8 @@ const Playfield = () => {
     if (direction === HARD_DROP) {
       dispatch(hardDropTetrad());
       dispatch(checkIfBlocked());
+    } else if (direction === PAUSE) {
+      dispatch(pauseGame());
     } else {
       dispatch(moveTetrad(direction));
     }
