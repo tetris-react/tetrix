@@ -41,6 +41,7 @@ const Playfield = () => {
   useListenKeyPress(direction => {
     if (direction === HARD_DROP) {
       dispatch(hardDropTetrad());
+      dispatch(checkIfBlocked());
     } else {
       dispatch(moveTetrad(direction));
     }
