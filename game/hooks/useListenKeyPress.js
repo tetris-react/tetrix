@@ -7,7 +7,6 @@ const useListenKeyPress = callback => {
   const dispatch = useDispatch();
 
   const keyDownHandler = e => {
-    console.log(e.keyCode);
     switch (e.keyCode) {
       case 40:
         callback(DOWN);
