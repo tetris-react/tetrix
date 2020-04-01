@@ -21,7 +21,8 @@ interface Options {
 
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
+    uri: process.env.APOLLO_URI,
+    // uri: "http://localhost:4000/graphql",
     credentials: "include",
   });
 
