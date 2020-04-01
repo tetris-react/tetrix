@@ -1,7 +1,6 @@
-import { gql } from 'apollo-boost';
-import React from 'react'
-import { useMutation } from '@apollo/react-hooks';
-import { withApollo } from '../lib/apollo';
+import { gql } from "apollo-boost";
+import { useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 const REGISTER = gql`
   mutation Register($data: RegisterInput!) {
@@ -16,7 +15,6 @@ const REGISTER = gql`
   }
 `;
 
-
 const LOGIN = gql`
   mutation Login($data: LoginInput!) {
     login(data: $data) {
@@ -25,10 +23,52 @@ const LOGIN = gql`
   }
 `;
 
+const LOGOUT = gql`
+  mutation Logout {
+    logout
+  }
+`;
+
+const ME = gql`
+  query CurrentUser {
+    currentUser {
+      id
+      username
+      email
+      country
+      tzAbv
+      tzName
+      records {
+        id
+        score
+        level
+        lines
+        isPrivate
+      }
+    }
+  }
+`;
+
 const Apollo = () => {
   const [register, { data, loading, error }] = useMutation(REGISTER);
-  const [login, { data: loginData, loading: loginLoading, error: loginError }] = useMutation(LOGIN);
-  // const {register: registerData} = data;
+  const [
+    login,
+    { data: loginData, loading: loginLoading, error: loginError },
+  ] = useMutation(LOGIN);
+  const [
+    logout,
+    { data: logoutData, loading: logoutLoading, error: logoutError },
+  ] = useMutation(LOGOUT);
+  const {
+    data: meData,
+    loading: meLoading,
+    error: meError,
+    refetch,
+  } = useQuery(ME);
+
+  useEffect(() => {
+    refetch();
+  }, [loginData?.login?.username]);
 
   const handleRegister = (e: any) => {
     e.preventDefault();
@@ -36,13 +76,13 @@ const Apollo = () => {
     register({
       variables: {
         data: {
-          email: "4@t.com",
-          username: "dave4",
+          email: "billy@thekid.com",
+          username: "billyTheKid",
           password: "password",
           tzAbv: "EST",
-          tzName: "America/New_York"
-        }
-      }
+          tzName: "America/New_York",
+        },
+      },
     });
   };
 
@@ -51,62 +91,54 @@ const Apollo = () => {
     login({
       variables: {
         data: {
-          username: "dave3",
-          password: "password"
-        }
-      }
-    })
-  }
+          username: "FireNinja",
+          password: "password",
+        },
+      },
+    });
+  };
 
-  console.log('error', loginError);
-  console.log('loginData?.login', loginData?.login);
+  const handleLogout = (e: any) => {
+    e.preventDefault();
+    logout();
+  };
 
   return (
     <div>
       <button onClick={handleRegister}>Register</button>
-      {data?.register
-        ? <h1 style={{color: 'white'}}>{data?.register?.username}</h1> 
-        : loading 
-          ? <h1 style={{ color: 'white' }}>...Loading</h1>
-        : error
-            ? <h1 style={{ color: 'white' }}>{error.message}</h1>
-        : null
-      }
+      {data?.register ? (
+        <h1 style={{ color: "white" }}>{data?.register?.username}</h1>
+      ) : loading ? (
+        <h1 style={{ color: "white" }}>...Loading</h1>
+      ) : error ? (
+        <h1 style={{ color: "white" }}>{error.message}</h1>
+      ) : null}
       <button onClick={handleLogin}>Login</button>
-      {loginData?.login
-        ? <h1 style={{ color: 'white' }}>{loginData?.login?.username}</h1>
-        : loginLoading
-          ? <h1 style={{ color: 'white' }}>...Loading</h1>
-          : loginError
-            ? <h1 style={{ color: 'white' }}>{loginError.message}</h1>
-            : null
-      }
+      {loginData?.login ? (
+        <h1 style={{ color: "white" }}>{loginData?.login?.username}</h1>
+      ) : loginLoading ? (
+        <h1 style={{ color: "white" }}>...Loading</h1>
+      ) : loginError ? (
+        <h1 style={{ color: "white" }}>{loginError.message}</h1>
+      ) : null}
+      <button onClick={handleLogout}>Logout</button>
+      {logoutData?.logout ? (
+        <h1 style={{ color: "white" }}>{logoutData?.logout?.username}</h1>
+      ) : logoutLoading ? (
+        <h1 style={{ color: "white" }}>...Loading</h1>
+      ) : logoutError ? (
+        <h1 style={{ color: "white" }}>{logoutError.message}</h1>
+      ) : null}
+      <h1 style={{ color: "white" }}>Who am I?</h1>
+      {meData?.currentUser ? (
+        <h1 style={{ color: "white" }}>{meData?.currentUser?.username}</h1>
+      ) : meLoading ? (
+        <h1 style={{ color: "white" }}>...Loading</h1>
+      ) : meError ? (
+        <h1 style={{ color: "white" }}>{meError.message}</h1>
+      ) : null}
     </div>
-  )
-}
+  );
+};
 
-export default withApollo({ ssr: true })(Apollo);
-
-
-/*
-
-  mutation Register {
-    register(
-      data: {
-        email: "FireNinja@gmail.com"
-        username: "FireNinja"
-        password: "password"
-        tzAbv: "CST"
-        tzName: "America/Chicago"
-      }
-    ) {
-      id
-      username
-      email
-      country
-      tzAbv
-      tzName
-    }
-  }
-*/
-
+export default Apollo;
