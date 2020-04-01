@@ -28,6 +28,7 @@ const playfieldReducer = (state = initialState, action) => {
         ...state,
         matrix: action.payload.matrix,
         tetrad: action.payload.tetrad,
+        deletedRows: [],
         rowsSkipped: 0,
         tetradLocked: false
       };
@@ -74,8 +75,7 @@ const playfieldReducer = (state = initialState, action) => {
     case COLLAPSE_ROWS:
       return {
         ...state,
-        matrix: action.payload.matrix,
-        deletedRows: []
+        matrix: action.payload.matrix
       };
     default:
       return state;
