@@ -7,6 +7,7 @@ export const RESTART_GAME = 'RESTART_GAME';
 export const CALCULATE_SCORE = 'CALCULATE_SCORE';
 export const INCREMENT_TIME = 'INCREMENT_TIME';
 export const INCREMENT_ATTACK = 'INCREMENT_ATTACK';
+export const INCREMENT_TETRIS = 'INCREMENT_TETRIS';
 export const INCREMENT_TETRADS_PROCESSED = 'INCREMENT_TETRADS_PROCESSED';
 
 export const startGame = () => dispatch => {
@@ -88,9 +89,22 @@ export const incrementTetrads = () => (dispatch, state) => {
   });
 };
 
+export const incrementTetris = () => (dispatch, state) => {
+  let { tetrisNum } = state().game;
+
+  tetrisNum++;
+
+  dispatch({
+    type: INCREMENT_TETRIS,
+    payload: {
+      tetrisNum
+    }
+  });
+};
+
 export const calculateScore = () => (dispatch, state) => {
   const numRows = state().playfield.deletedRows.length;
-  let { rowsCleared, level, score } = state().game;
+  let { rowsCleared, level, score, tetrisNum, tetrisRate } = state().game;
   let { rowsSkipped } = state().playfield;
 
   const points =
@@ -102,12 +116,20 @@ export const calculateScore = () => (dispatch, state) => {
   score += points * (level + 1) + rowsSkipped;
   level += rowsCleared >= level * 10 + 10 ? 1 : 0;
 
+  tetrisRate = roundTwoDecimals(tetrisNum * 4 / rowsCleared);
+
+  function roundTwoDecimals(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
+  }
+
   dispatch({
     type: CALCULATE_SCORE,
     payload: {
       rowsCleared,
       level,
-      score
+      score,
+      tetrisRate,
+      tetrisNum
     }
   });
 };

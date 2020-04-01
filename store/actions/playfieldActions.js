@@ -1,6 +1,6 @@
 import { DOWN } from '../../game/constants';
 import { getRandomTetrad } from '../../game/datatypes/helper';
-import { GAME_OVER, incrementTetrads } from './gameActions';
+import { GAME_OVER, incrementTetrads, incrementTetris } from './gameActions';
 export const SPAWN_TETRAD = 'SPAWN_TETRAD';
 export const MOVE_TETRAD = 'MOVE_TETRAD';
 export const HARD_DROP_TETRAD = 'HARD_DROP_TETRAD';
@@ -127,5 +127,9 @@ export const collapseEmptyRows = () => (dispatch, state) => {
         matrix: matrix
       }
     });
+
+    if (deletedRows.length === 4) {
+      dispatch(incrementTetris());
+    }
   }
 };

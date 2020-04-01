@@ -4,9 +4,16 @@ import Timer from './Timer';
 import { ScoreBoardContainer } from './styles/ScoreBoardContainer';
 
 const ScoreBoard = () => {
-  const { score, topScore, level, rowsCleared, aps, tps } = useSelector(
-    state => state.game
-  );
+  const {
+    score,
+    topScore,
+    level,
+    rowsCleared,
+    aps,
+    tps,
+    tetrisNum,
+    tetrisRate
+  } = useSelector(state => state.game);
   return (
     <ScoreBoardContainer>
       <Timer />
@@ -42,11 +49,15 @@ const ScoreBoard = () => {
         <hr />
         <div>
           <span>Tetris #</span>
-          <span>16</span>
+          <span>
+            {tetrisNum}
+          </span>
         </div>
         <div>
           <span>Tetris %</span>
-          <span>.05</span>
+          <span>
+            {tetrisRate}
+          </span>
         </div>
         <hr />
       </section>
