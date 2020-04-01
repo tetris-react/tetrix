@@ -112,19 +112,7 @@ export const calculateScore = () => (dispatch, state) => {
   score += points * (level + 1) + rowsSkipped;
   level += rowsCleared >= level * 10 + 10 ? 1 : 0;
 
-  console.log('BEFORE: ********************');
-  console.log('tetrisNum                  :', tetrisNum);
-  console.log('rowsCleared                :', rowsCleared);
-  console.log('tetrisNum * 4              :', tetrisNum * 4);
-  console.log(
-    'tetrisNum * 4 / rowsCleared:',
-    roundTwoDecimals(tetrisNum * 4 / rowsCleared)
-  );
-
   tetrisRate = roundTwoDecimals(tetrisNum * 4 / rowsCleared);
-  console.log('RESULT: ********************');
-  console.log('tetrisRate                 :', tetrisRate);
-  console.log('\n');
 
   dispatch({
     type: CALCULATE_SCORE,
