@@ -4,6 +4,7 @@ import {
   GAME_OVER,
   INCREMENT_ATTACK,
   INCREMENT_TETRADS_PROCESSED,
+  INCREMENT_TETRIS,
   INCREMENT_TIME,
   PAUSE_GAME,
   RESTART_GAME,
@@ -61,7 +62,11 @@ const gameReducer = (state = initialState, action) => {
         aps: action.payload.aps,
         tps: action.payload.tps
       };
-
+    case INCREMENT_TETRIS:
+      return {
+        ...state,
+        tetrisNum: action.payload.tetrisNum
+      };
     case INCREMENT_ATTACK:
       return {
         ...state,
@@ -101,7 +106,9 @@ const gameReducer = (state = initialState, action) => {
         rowsCleared: action.payload.rowsCleared,
         level: action.payload.level,
         score: action.payload.score,
-        frameRate: G[action.payload.level]
+        frameRate: G[action.payload.level],
+        tetrisRate: action.payload.tetrisRate,
+        tetrisNum: action.payload.tetrisNum
       };
     default:
       return state;

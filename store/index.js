@@ -21,7 +21,8 @@ export {
   restartGame,
   incrementTime,
   incrementAttack,
-  incrementTetrads
+  incrementTetrads,
+  incrementTetris
 } from './actions/gameActions';
 
 export {
@@ -45,6 +46,7 @@ export {
   CALCULATE_SCORE,
   RESTART_GAME,
   INCREMENT_TIME,
+  INCREMENT_TETRIS,
   INCREMENT_ATTACK,
   INCREMENT_TETRADS_PROCESSED
 } from './actions/gameActions';
