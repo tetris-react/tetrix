@@ -22,7 +22,7 @@ export const spawnTetrad = (lastType = '') => (dispatch, state) => {
     }
   });
 
-  dispatch(incrementTetrads());
+  dispatch(checkSpawnCollision());
 };
 
 export const moveTetrad = (direction = DOWN) => (dispatch, state) => {
@@ -94,6 +94,8 @@ export const checkSpawnCollision = () => (dispatch, state) => {
     } else {
       dispatch({ type: GAME_OVER });
     }
+  } else {
+    dispatch(incrementTetrads());
   }
 };
 

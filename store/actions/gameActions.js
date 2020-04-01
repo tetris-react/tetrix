@@ -1,5 +1,7 @@
 import { spawnTetrad } from '../index';
 export const START_GAME = 'START_GAME';
+export const PAUSE_GAME = 'PAUSE_GAME';
+export const RESUME_GAME = 'RESUME_GAME';
 export const GAME_OVER = 'GAME_OVER';
 export const RESTART_GAME = 'RESTART_GAME';
 export const CALCULATE_SCORE = 'CALCULATE_SCORE';
@@ -25,6 +27,26 @@ export const restartGame = () => (dispatch, state) => {
   });
 
   dispatch(spawnTetrad());
+};
+
+export const pauseGame = () => (dispatch, state) => {
+  let { gameStarted, gameOver, gamePaused } = state().game;
+
+  if (gameStarted) {
+    dispatch({
+      type: PAUSE_GAME
+    });
+  }
+
+  if (gamePaused) {
+    dispatch(resumeGame());
+  }
+};
+
+export const resumeGame = () => (dispatch, state) => {
+  dispatch({
+    type: RESUME_GAME
+  });
 };
 
 export const incrementTime = () => (dispatch, state) => {

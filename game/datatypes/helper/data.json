@@ -5,10 +5,10 @@
     "orientation": 0,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 3, "y": 0 },
-      { "x": 4, "y": 0 },
-      { "x": 5, "y": 0 },
-      { "x": 6, "y": 0 }
+      { "x": 3, "y": 2 },
+      { "x": 4, "y": 2 },
+      { "x": 5, "y": 2 },
+      { "x": 6, "y": 2 }
     ],
     "rotationalMatrices": [
       [
@@ -43,10 +43,10 @@
     "orientation": -1,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 4, "y": 0 },
-      { "x": 5, "y": 0 },
-      { "x": 4, "y": 1 },
-      { "x": 5, "y": 1 }
+      { "x": 4, "y": 2 },
+      { "x": 5, "y": 2 },
+      { "x": 4, "y": 3 },
+      { "x": 5, "y": 3 }
     ],
     "rotationalMatrices": [
       [
@@ -81,10 +81,10 @@
     "orientation": 0,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 4, "y": 0 },
-      { "x": 5, "y": 0 },
-      { "x": 6, "y": 0 },
-      { "x": 5, "y": 1 }
+      { "x": 4, "y": 2 },
+      { "x": 5, "y": 2 },
+      { "x": 6, "y": 2 },
+      { "x": 5, "y": 3 }
     ],
     "rotationalMatrices": [
       [
@@ -119,10 +119,10 @@
     "orientation": 0,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 5, "y": 0 },
-      { "x": 6, "y": 0 },
-      { "x": 4, "y": 1 },
-      { "x": 5, "y": 1 }
+      { "x": 5, "y": 2 },
+      { "x": 6, "y": 2 },
+      { "x": 4, "y": 3 },
+      { "x": 5, "y": 3 }
     ],
     "rotationalMatrices": [
       [
@@ -157,10 +157,10 @@
     "orientation": 0,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 4, "y": 0 },
-      { "x": 5, "y": 0 },
-      { "x": 5, "y": 1 },
-      { "x": 6, "y": 1 }
+      { "x": 4, "y": 2 },
+      { "x": 5, "y": 2 },
+      { "x": 5, "y": 3 },
+      { "x": 6, "y": 3 }
     ],
     "rotationalMatrices": [
       [
@@ -195,10 +195,10 @@
     "orientation": 0,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 4, "y": 0 },
-      { "x": 5, "y": 0 },
-      { "x": 6, "y": 0 },
-      { "x": 6, "y": 1 }
+      { "x": 4, "y": 2 },
+      { "x": 5, "y": 2 },
+      { "x": 6, "y": 2 },
+      { "x": 6, "y": 3 }
     ],
     "rotationalMatrices": [
       [
@@ -233,10 +233,10 @@
     "orientation": 0,
     "prevCoordinates": [],
     "coordinates": [
-      { "x": 4, "y": 0 },
-      { "x": 5, "y": 0 },
-      { "x": 6, "y": 0 },
-      { "x": 4, "y": 1 }
+      { "x": 4, "y": 2 },
+      { "x": 5, "y": 2 },
+      { "x": 6, "y": 2 },
+      { "x": 4, "y": 3 }
     ],
     "rotationalMatrices": [
       [

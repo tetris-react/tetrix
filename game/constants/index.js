@@ -1,7 +1,7 @@
 export const FPS_60 = 60;
 export const FRAME_RATE_MULTIPLIER = 16.6666666667;
 // Matrix Dimensions
-export const NUM_ROWS = 20;
+export const NUM_ROWS = 22; // two extra rows for rotational buffer at spawn
 export const NUM_COLS = 10;
 
 // Tetrad Directions
