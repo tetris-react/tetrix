@@ -26,8 +26,8 @@ const Playfield = () => {
   useEffect(
     () => {
       if (tetradLocked && !gameOver) {
-        dispatch(calculateScore());
         dispatch(collapseEmptyRows());
+        dispatch(calculateScore());
         dispatch(spawnTetrad(tetrad.type));
       }
     },
