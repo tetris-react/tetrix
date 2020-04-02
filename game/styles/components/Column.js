@@ -8,9 +8,9 @@ const Column = styled.div`
   max-width: calc(100% / 3);
   max-height: 100vh;
   margin: auto;
-  background-color: #212121;
+  /* background-color: #212121;
   border-right: 1px solid black;
-  border-left: 1px solid black;
+  border-left: 1px solid black; */
 `;
 
 export default Column;

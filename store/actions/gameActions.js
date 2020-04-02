@@ -57,10 +57,6 @@ export const incrementTime = () => (dispatch, state) => {
   tps = roundTwoDecimals(tetradsProcessed / totalSeconds);
   totalSeconds++;
 
-  function roundTwoDecimals(num) {
-    return Math.round((num + Number.EPSILON) * 100) / 100;
-  }
-
   dispatch({
     type: INCREMENT_TIME,
     payload: {
@@ -104,7 +100,7 @@ export const incrementTetris = () => (dispatch, state) => {
 
 export const calculateScore = () => (dispatch, state) => {
   const numRows = state().playfield.deletedRows.length;
-  let { rowsCleared, level, score, tetrisNum, tetrisRate } = state().game;
+  let { rowsCleared, level, score, tetrisNum, tetrisRate, burn } = state().game;
   let { rowsSkipped } = state().playfield;
 
   const points =
@@ -117,10 +113,7 @@ export const calculateScore = () => (dispatch, state) => {
   level += rowsCleared >= level * 10 + 10 ? 1 : 0;
 
   tetrisRate = roundTwoDecimals(tetrisNum * 4 / rowsCleared);
-
-  function roundTwoDecimals(num) {
-    return Math.round((num + Number.EPSILON) * 100) / 100;
-  }
+  burn = numRows < 4 ? burn + numRows : 0;
 
   dispatch({
     type: CALCULATE_SCORE,
@@ -129,7 +122,15 @@ export const calculateScore = () => (dispatch, state) => {
       level,
       score,
       tetrisRate,
-      tetrisNum
+      tetrisNum,
+      burn
     }
   });
 };
+
+function roundTwoDecimals(num) {
+  let roundedNum = Math.round((num + Number.EPSILON) * 100) / 100;
+
+  if (isNaN(roundedNum) || !isFinite(roundedNum)) return 0;
+  return roundedNum;
+}
