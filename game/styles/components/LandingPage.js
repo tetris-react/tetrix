@@ -6,8 +6,6 @@ export const LandingContainer = styled(AppContainer)`
   align-items: center;
   justify-content: flex-start;
 
-  /* border: 1px solid white; */
-
   color: #FAFAFA;
 `;
 
@@ -38,10 +36,10 @@ export const Content = styled.div`
   /* border: 1px solid white; */
 `;
 
-export const Button = styled.button`
-  padding: 0 20px;
+export const Link = styled.a`
+  padding: 1vh 2vh 0 2vh;
   width: fit-content;
-  height: 60px;
+  height: 6.5vh;
   background: transparent;
   border: 1px solid #fafafa;
 

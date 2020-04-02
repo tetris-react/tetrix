@@ -2,7 +2,7 @@ export {
   LandingContainer,
   Banner,
   Content,
-  Button
+  Link
 } from './components/LandingPage';
 export {
   NavContainer,
@@ -12,6 +12,8 @@ export {
   Options,
   Option,
   ProfileContainer,
+  MenuContainer,
+  AvatarImg,
   TimerContainer
 } from './components/NavContainer';
 export { default as ButtonDialog } from './components/ButtonDialog';

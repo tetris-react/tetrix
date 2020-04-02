@@ -1,38 +1,102 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const ProfileMenu = () => {
+  const [open, setOpen] = useState(false);
+
+  const toggleMenu = e => {
+    setOpen(open => !open);
+  };
+
+  const handleSelection = e => {
+    setOpen(false);
+  };
+
   return (
-    <AvatarContainer>
-      <AvatarImg>
-        <img src="" alt="" />
-      </AvatarImg>
-      <Username>angry_typer</Username>
-    </AvatarContainer>
+    <MenuContainer>
+      <Select onClick={toggleMenu}>
+        <AvatarImg />
+        <Username>
+          <ArrowDropDownIcon />
+          <span>angry_typer</span>
+        </Username>
+      </Select>
+      <Options isOpen={open}>
+        <Option onClick={handleSelection}>Settings</Option>
+        <Option onClick={handleSelection}>Logout</Option>
+      </Options>
+    </MenuContainer>
   );
 };
 
-const AvatarContainer = styled.div`
+const MenuContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: fit-content;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 20vh;
 `;
 
-const AvatarImg = styled.div`
+const Select = styled.div`
+  display: flex;
+  font-size: 2vh;
+  padding-bottom: .5vh;
+
+  cursor: pointer;
+`;
+
+export const AvatarImg = styled.div`
   width: 3vh;
   height: 3vh;
 
-  margin-right: 2vh;
+  margin-right: 1vh;
   border-radius: 50%;
 
   background-color: #000000;
 `;
 
 const Username = styled.div`
-  width: fit-content;
-  color: #fafafa;
+  span {
+    padding: .2vh;
+    border-bottom: 1px solid #fafafa;
+  }
+
+  svg {
+    margin-right: 1vh;
+    margin-top: .5vh;
+  }
+
+  &:hover {
+    color: #cccccc;
+    span {
+      border-bottom: 1px solid #cccccc;
+    }
+  }
+`;
+
+const Options = styled.div`
+  display: ${props => (props.isOpen ? 'flex' : 'none')};
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  width: 20vh;
+  top: 6vh;
   font-size: 2vh;
+  list-style-type: none;
+`;
+
+export const Option = styled.li`
+  color: #cccccc;
+  margin-bottom: 1vh;
+  text-align: right;
+  width: 12.2vh;
+
+  &:hover {
+    color: #fafafa;
+    border-bottom: 1px solid #fafafa;
+  }
+
+  cursor: pointer;
 `;
 
 export default ProfileMenu;

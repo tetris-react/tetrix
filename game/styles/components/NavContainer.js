@@ -24,6 +24,23 @@ export const ProfileContainer = styled.div`
   width: 50vh;
 `;
 
+export const MenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+`;
+
+export const AvatarImg = styled.div`
+  width: 3vh;
+  height: 3vh;
+
+  margin-right: 2vh;
+  border-radius: 50%;
+
+  background-color: #000000;
+`;
+
 export const TimerContainer = styled.div`
   display: flex;
   align-items: center;

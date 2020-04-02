@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Column } from '../../../styles';
 
 export const ScoreBoardContainer = styled(Column)`
-  align-items: flex-end;
+  align-items: flex-start;
   padding: 6.3vh 4vh 2vh 4vh;
   font-size: 3.0vh;
   color: #CCCCCC;
@@ -16,12 +16,12 @@ export const ScoreBoardContainer = styled(Column)`
     div {
       display:flex;
       justify-content: space-between;
-      margin: 10px 0px;
+      margin: 1vh 0px;
     }
 
     hr {
       width: 105%;
-      margin-left: -28px;
+      margin-left: -2.8vh;
     }
   }
 
@@ -32,7 +32,7 @@ export const ScoreBoardContainer = styled(Column)`
     color: #FAFAFA;
     
     div {
-      margin: 10px 0;
+      margin: 1vh 0;
     }
 
     hr {
@@ -44,5 +44,6 @@ export const ScoreBoardContainer = styled(Column)`
   section:last-of-type {
     font-size: 2.0vh;
     width: 95%;
+    margin-left: 5%;
   }
 `;
