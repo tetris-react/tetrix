@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const ProfileMenu = () => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const toggleMenu = e => {
@@ -11,6 +13,11 @@ const ProfileMenu = () => {
 
   const handleSelection = e => {
     setOpen(false);
+  };
+
+  const handleLogout = e => {
+    e.preventDefault();
+    router.push('/');
   };
 
   return (
@@ -24,7 +31,7 @@ const ProfileMenu = () => {
       </Select>
       <Options isOpen={open}>
         <Option onClick={handleSelection}>Settings</Option>
-        <Option onClick={handleSelection}>Logout</Option>
+        <Option onClick={handleLogout}>Logout</Option>
       </Options>
     </MenuContainer>
   );
