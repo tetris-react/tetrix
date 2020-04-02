@@ -3,10 +3,17 @@ import { Column } from '../../../styles';
 
 export const ScoreBoardContainer = styled(Column)`
   align-items: flex-end;
-  padding: 40px;
+  padding: 20px 40px;
   
-  font-size: 3.0rem;
+  font-size: 3.0vh;
   color: #CCCCCC;
+
+  > div {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
 
   section {
     display:flex;
@@ -28,11 +35,12 @@ export const ScoreBoardContainer = styled(Column)`
 
   section:first-of-type {
     width: 100%;
+    padding-top: 10px;
 
     color: #FAFAFA;
-
+    
     div {
-      margin: 20px 0;
+      margin: 10px 0;
     }
 
     hr {
@@ -42,7 +50,7 @@ export const ScoreBoardContainer = styled(Column)`
   }
 
   section:last-of-type {
-    font-size: 2.0rem;
+    font-size: 2.0vh;
     width: 95%;
   }
 `;

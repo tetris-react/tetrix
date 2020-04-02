@@ -3,8 +3,8 @@ import { Column } from '../../../styles';
 
 export const StatisticsContainer = styled(Column)`
   align-items: flex-start;
-  padding: 40px;
-  font-size: 3.0rem;
+  padding: 97px 40px;
+  font-size: 3.0vh;
   color: #FAFAFA;
 
   section {

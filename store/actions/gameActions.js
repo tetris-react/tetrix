@@ -100,7 +100,7 @@ export const incrementTetris = () => (dispatch, state) => {
 
 export const calculateScore = () => (dispatch, state) => {
   const numRows = state().playfield.deletedRows.length;
-  let { rowsCleared, level, score, tetrisNum, tetrisRate } = state().game;
+  let { rowsCleared, level, score, tetrisNum, tetrisRate, burn } = state().game;
   let { rowsSkipped } = state().playfield;
 
   const points =
@@ -113,6 +113,7 @@ export const calculateScore = () => (dispatch, state) => {
   level += rowsCleared >= level * 10 + 10 ? 1 : 0;
 
   tetrisRate = roundTwoDecimals(tetrisNum * 4 / rowsCleared);
+  burn = numRows < 4 ? burn + numRows : 0;
 
   dispatch({
     type: CALCULATE_SCORE,
@@ -121,7 +122,8 @@ export const calculateScore = () => (dispatch, state) => {
       level,
       score,
       tetrisRate,
-      tetrisNum
+      tetrisNum,
+      burn
     }
   });
 };

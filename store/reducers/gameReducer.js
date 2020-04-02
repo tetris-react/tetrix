@@ -22,6 +22,7 @@ const initialState = {
   topScore: 0,
   tetrisNum: 0,
   tetrisRate: 0,
+  burn: 0,
   attacks: 0,
   aps: 0, // attacks per second
   tetradsProcessed: -1,
@@ -108,7 +109,8 @@ const gameReducer = (state = initialState, action) => {
         score: action.payload.score,
         frameRate: G[action.payload.level],
         tetrisRate: action.payload.tetrisRate,
-        tetrisNum: action.payload.tetrisNum
+        tetrisNum: action.payload.tetrisNum,
+        burn: action.payload.burn
       };
     default:
       return state;

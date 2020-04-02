@@ -65,7 +65,7 @@ const Button = styled.button`
   border: 1px solid #fafafa;
 
   color: #fafafa;
-  font-size: 38px;
+  font-size: 3.8vh;
 
   cursor: pointer;
   outline: none;
