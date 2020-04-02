@@ -1,10 +1,17 @@
-import { AppContainer } from '../../game/styles';
+import { Navigation } from '../../game/components';
+import { Banner, Button, Content, LandingContainer } from '../../game/styles';
 
 const Index = () => {
   return (
-    <AppContainer>
-      <h1>Tetrix</h1>
-    </AppContainer>
+    <LandingContainer>
+      <Navigation />
+      <Banner>
+        <h1>Tetrix</h1>
+      </Banner>
+      <Content>
+        <Button>Play Now</Button>
+      </Content>
+    </LandingContainer>
   );
 };
 
