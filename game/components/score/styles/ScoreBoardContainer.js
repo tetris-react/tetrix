@@ -3,17 +3,9 @@ import { Column } from '../../../styles';
 
 export const ScoreBoardContainer = styled(Column)`
   align-items: flex-end;
-  padding: 20px 40px;
-  
+  padding: 6.3vh 4vh 2vh 4vh;
   font-size: 3.0vh;
   color: #CCCCCC;
-
-  > div {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
 
   section {
     display:flex;

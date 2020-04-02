@@ -1,7 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Avatar from './Avatar';
-import Timer from './Timer';
 import { ScoreBoardContainer } from './styles/ScoreBoardContainer';
 
 const ScoreBoard = () => {
@@ -18,10 +16,6 @@ const ScoreBoard = () => {
   } = useSelector(state => state.game);
   return (
     <ScoreBoardContainer>
-      <div>
-        <Timer />
-        <Avatar />
-      </div>
       <section>
         <div>
           <span>Top Score</span>

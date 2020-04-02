@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Avatar = () => {
+const ProfileMenu = () => {
   return (
     <AvatarContainer>
       <AvatarImg>
         <img src="" alt="" />
       </AvatarImg>
-      <Username>user_name</Username>
+      <Username>angry_typer</Username>
     </AvatarContainer>
   );
 };
@@ -16,14 +16,15 @@ const AvatarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40%;
+  width: fit-content;
 `;
 
 const AvatarImg = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 3vh;
+  height: 3vh;
 
-  border-radius: 50px;
+  margin-right: 2vh;
+  border-radius: 50%;
 
   background-color: #000000;
 `;
@@ -31,7 +32,7 @@ const AvatarImg = styled.div`
 const Username = styled.div`
   width: fit-content;
   color: #fafafa;
-  font-size: 2.0rem;
+  font-size: 2vh;
 `;
 
-export default Avatar;
+export default ProfileMenu;

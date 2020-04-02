@@ -1,10 +1,17 @@
 import React from 'react';
-import { NavContainer } from '../../styles';
+import { NavContainer, ProfileContainer } from '../../styles';
+import ProfileMenu from './ProfileMenu';
+import Timer from './Timer';
+import ViewSelector from './ViewSelector';
 
 const Navigation = () => {
   return (
     <NavContainer>
-      <div />
+      <ViewSelector />
+      <ProfileContainer>
+        <Timer />
+        <ProfileMenu />
+      </ProfileContainer>
     </NavContainer>
   );
 };
