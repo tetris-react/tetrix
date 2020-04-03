@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { PropagateLoader } from 'react-spinners';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN } from '../../../queries';
 import { Button, ButtonContainer, Form, Input } from './styles';
@@ -51,6 +52,7 @@ const Login = props => {
         value={user.username}
         placeholder="user_name"
         onChange={handleChange}
+        disabled={loading}
       />
       <span>
         {errors.username}
@@ -61,18 +63,27 @@ const Login = props => {
         value={user.password}
         placeholder="password"
         onChange={handleChange}
+        disabled={loading}
       />
       <span>
         {errors.password}
       </span>
-      <ButtonContainer>
-        <Button type="button" onClick={() => props.setViewForm(false)}>
-          Go Back
-        </Button>
-        <Button type="submit" onClick={handleSubmit}>
-          Login
-        </Button>
-      </ButtonContainer>
+      {!loading &&
+        <ButtonContainer>
+          <Button type="button" onClick={() => props.setViewForm(false)}>
+            Go Back
+          </Button>
+          <Button type="submit" onClick={handleSubmit}>
+            Login
+          </Button>
+        </ButtonContainer>}
+      <PropagateLoader
+        className="spinner"
+        sizeUnit={'vh'}
+        size={10}
+        color={'#d2d2d2'}
+        loading={loading}
+      />
     </Form>
   );
 };

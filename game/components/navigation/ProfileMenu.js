@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { ACTIVE_SESSION, LOG_OUT } from '../../../queries';
-
-const ProfileMenu = () => {
-  const { data: session, refetch } = useQuery(ACTIVE_SESSION);
-  const [logout] = useMutation(LOG_OUT);
+no worries b
+const ProfileMenu = (props) => {
+  // const {session, refetch} = props;
+  const {data:session, refetch} = useQuery(ACTIVE_SESSION);
+  const [logout, {data}] = useMutation(LOG_OUT);
   const user = session?.currentUser
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -25,23 +26,34 @@ const ProfileMenu = () => {
     setOpen(false);
   };
 
-  console.log('user', user);
+  useEffect(
+    () => {
+      if (data) refetch();
+    },
+    [data]
+  );
+
+  console.log("data", data)
 
   return (
     <MenuContainer>
-      <Select onClick={toggleMenu}>
-        {/* <AvatarImg /> */}
-        <Username>
-          <ArrowDropDownIcon />
-          <span>
-            {user.username}
-          </span>
-        </Username>
-      </Select>
-      <Options isOpen={open}>
-        <Option onClick={handleSelection}>Settings</Option>
-        <Option onClick={handleLogout}>Logout</Option>
-      </Options>
+      {session && 
+        <>
+          <Select onClick={toggleMenu}>
+            {/* <AvatarImg /> */}
+            <Username>
+              <ArrowDropDownIcon />
+              <span>
+                {user.username}
+              </span>
+            </Username>
+          </Select>
+          <Options isOpen={open}>
+            <Option onClick={handleSelection}>Settings</Option>
+            <Option onClick={handleLogout}>Logout</Option>
+          </Options>
+        </>
+      }
     </MenuContainer>
   );
 };

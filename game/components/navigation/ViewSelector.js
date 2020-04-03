@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { ACTIVE_SESSION } from '../../../queries';
 import {
   Option,
   Options,
@@ -8,7 +9,8 @@ import {
   SelectionContainer
 } from '../../styles';
 
-const ViewSelector = () => {
+const ViewSelector = props => {
+  const { session } = props;
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState('Statistics');
   const [view, setView] = useState('statistics');
@@ -49,6 +51,7 @@ const ViewSelector = () => {
             Leaderboard
           </Option>}
         {selection !== 'Personal Board' &&
+          session &&
           <Option
             value="personal-board"
             name="Personal Board"

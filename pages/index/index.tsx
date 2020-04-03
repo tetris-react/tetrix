@@ -1,8 +1,6 @@
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Play from '../../game';
-import { Navigation } from '../../game/components';
 import Login from '../../game/components/auth/Login';
 import Register from '../../game/components/auth/Register';
 import {
@@ -17,14 +15,15 @@ import { ACTIVE_SESSION } from '../../queries';
 
 const Index = () => {
   const {data: session, refetch} = useQuery(ACTIVE_SESSION);
-  const router = useRouter();
+
 
   const [viewForm, setViewForm] = useState(false);
   const [formType, setFormType] = useState('register');
+  const [guestPlay, setGuestPlay] = useState(false);
 
-  const startGame = (e: any) => {
+  const startGuestPlay = (e: any) => {
     e.preventDefault();
-    router.push('/play');
+    setGuestPlay(true);
   };
 
   const handleClick = (e: any) => {
@@ -33,12 +32,11 @@ const Index = () => {
     setViewForm(viewForm => !viewForm);
   };
 
-  if(session?.currentUser)
-    return <Play />
+  if (session?.currentUser || guestPlay)
+    return <Play session={session} refetch={refetch}/>
 
   return (
     <LandingContainer>
-      <Navigation />
       <Banner>
         <h1>Tetrix</h1>
       </Banner>
@@ -50,7 +48,7 @@ const Index = () => {
           : null}
         {!viewForm &&
           <>
-            <Link onClick={startGame}>Play Now</Link>
+          <Link onClick={startGuestPlay}>Play Now</Link>
             <ButtonContainer>
               <Button value="login" onClick={handleClick}>
                 Login

@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import React, { useEffect, useState } from 'react';
+import {PropagateLoader} from 'react-spinners';
 import { useMutation } from '@apollo/react-hooks';
 import { REGISTER } from '../../../queries';
 import { Button, ButtonContainer, Form, Input } from './styles';
@@ -10,7 +11,7 @@ const tzAbbr = moment.tz(tzName).format('Z');
 const Register = props => {
   const { refetch } = props;
   const [errors, setErrors] = useState({});
-  const [register, {data}] = useMutation(REGISTER);
+  const [register, {data, loading, error}] = useMutation(REGISTER);
 
   const [user, setUser] = useState({
     username: '',
@@ -50,6 +51,7 @@ const Register = props => {
       );
       console.log(err?.graphQLErrors);
     }
+
     setErrors(newErrors);
 
   };
@@ -67,6 +69,7 @@ const Register = props => {
         value={user.username}
         placeholder="user_name"
         onChange={handleChange}
+        disabled={loading}
       />
       <span>
         {errors.username}
@@ -77,6 +80,7 @@ const Register = props => {
         value={user.password}
         placeholder="password"
         onChange={handleChange}
+        disabled={loading}
       />
       <span>
         {errors.password}
@@ -85,20 +89,31 @@ const Register = props => {
         type="email"
         name="email"
         value={user.email}
-        placeholder="email"
+        placeholder="email (optional)"
         onChange={handleChange}
+        disabled={loading}
       />
-      <span>
-        {errors.email}
-      </span>
-      <ButtonContainer>
-        <Button type="button" onClick={() => props.setViewForm(false)}>
-          Go Back
-        </Button>
-        <Button type="submit" onClick={handleRegister}>
-          Register
-        </Button>
-      </ButtonContainer>
+      {!loading && 
+        <>
+          <span>
+              Only used for password reset, and can be updated in user settings.
+          </span>
+          <ButtonContainer>
+            <Button type="button" onClick={() => props.setViewForm(false)}>
+              Go Back
+            </Button>
+              <Button type="submit" onClick={handleRegister}>
+                Register
+            </Button>
+          </ButtonContainer>
+        </>
+      }
+      <PropagateLoader className="spinner"
+        sizeUnit={'vh'}
+        size={10}
+        color={'#d2d2d2'}
+        loading={loading}
+      />
     </Form>
   );
 };

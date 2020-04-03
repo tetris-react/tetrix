@@ -1,4 +1,6 @@
 import { spawnTetrad } from '../index';
+export const LOGGING_IN = 'LOGGING_IN';
+export const REGISTERING = 'REGISTERING';
 export const START_GAME = 'START_GAME';
 export const PAUSE_GAME = 'PAUSE_GAME';
 export const RESUME_GAME = 'RESUME_GAME';
@@ -15,7 +17,7 @@ export const startGame = () => dispatch => {
   dispatch(spawnTetrad());
 };
 
-export const restartGame = () => (dispatch, state) => {
+export const restartGame = session => (dispatch, state) => {
   let { score, topScore } = state().game;
 
   topScore = score > topScore ? score : topScore;
@@ -124,6 +126,24 @@ export const calculateScore = () => (dispatch, state) => {
       tetrisRate,
       tetrisNum,
       burn
+    }
+  });
+};
+
+export const renderLoginModal = state => dispatch => {
+  dispatch({
+    type: LOGGING_IN,
+    payload: {
+      state
+    }
+  });
+};
+
+export const renderRegisterModal = state => dispatch => {
+  dispatch({
+    type: REGISTERING,
+    payload: {
+      state
     }
   });
 };
