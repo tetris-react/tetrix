@@ -14,6 +14,7 @@ const ScoreBoard = () => {
     tetrisRate,
     burn
   } = useSelector(state => state.game);
+
   return (
     <ScoreBoardContainer>
       <section>

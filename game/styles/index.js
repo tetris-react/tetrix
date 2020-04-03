@@ -2,7 +2,9 @@ export {
   LandingContainer,
   Banner,
   Content,
-  Link
+  Link,
+  ButtonContainer,
+  Button
 } from './components/LandingPage';
 export {
   NavContainer,

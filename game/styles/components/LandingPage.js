@@ -27,21 +27,23 @@ export const Banner = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 
   width: 100%;
   height: 50vh;
 
-  /* border: 1px solid white; */
+  /* border: 1px solid #fafafa; */
 `;
 
 export const Link = styled.a`
-  padding: 1vh 2vh 0 2vh;
-  width: fit-content;
+  padding-top: 1vh;
+  width: 25vh;
   height: 6.5vh;
   background: transparent;
   border: 1px solid #fafafa;
+  text-align: center;
 
   color: #fafafa;
   font-size: 3.8vh;
@@ -52,5 +54,28 @@ export const Link = styled.a`
   &:hover {
     color: #cccccc;
     border-color: #cccccc;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20vh;
+  height: 6vh;
+`;
+
+export const Button = styled.button`
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #fafafa;
+  font-size: 2vh;
+
+  cursor: pointer;
+
+  &:hover {
+    color: #cccccc;
   }
 `;
