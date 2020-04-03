@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import App, { Container } from "next/app";
+import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
@@ -25,17 +25,15 @@ class MyApp extends App<any> {
   render() {
     const { Component, pageProps, apolloClient } = this.props;
     return (
-      <Container>
-        <ApolloProvider client={apolloClient}>
-          <Provider store={store}>
-            <StylesProvider injectFirst>
-              <ThemeProvider theme={theme}>
-                <Component {...pageProps} />
-              </ThemeProvider>
-            </StylesProvider>
-          </Provider>
-        </ApolloProvider>
-      </Container>
+      <ApolloProvider client={apolloClient}>
+        <Provider store={store}>
+          <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </StylesProvider>
+        </Provider>
+      </ApolloProvider>
     );
   }
 }
