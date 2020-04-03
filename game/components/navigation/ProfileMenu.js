@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { ACTIVE_SESSION, LOG_OUT } from '../../../queries';
-no worries b
 const ProfileMenu = (props) => {
   // const {session, refetch} = props;
   const {data:session, refetch} = useQuery(ACTIVE_SESSION);
