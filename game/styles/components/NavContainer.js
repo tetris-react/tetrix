@@ -64,7 +64,9 @@ export const Select = styled.div`
 
   svg {
     margin-left: 1vh;
-    margin-top: .3vh;
+    margin-top: -.5vh;
+    width: 3vh;
+    height: 3vh;
   }
 
   padding-bottom: .5vh;
@@ -80,8 +82,11 @@ export const Selection = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 2vh;
-  width: 18vh;
-  border-bottom: 1px solid #fafafa;
+  width: 20vh;
+
+  &:hover {
+    border-bottom: 1px solid #cccccc;
+  }
 `;
 
 export const Options = styled.ul`
@@ -103,7 +108,6 @@ export const Option = styled.li`
 
   &:hover {
     color: #fafafa;
-    border-bottom: 1px solid #fafafa;
   }
 
   cursor: pointer;

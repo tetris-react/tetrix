@@ -26,7 +26,7 @@ export const LOGIN = gql`
   }
 `;
 
-export const LOGOUT = gql`
+export const LOG_OUT = gql`
   mutation Logout {
     logout
   }

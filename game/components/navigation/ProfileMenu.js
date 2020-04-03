@@ -1,9 +1,14 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { ACTIVE_SESSION, LOG_OUT } from '../../../queries';
 
 const ProfileMenu = () => {
+  const { data: session, refetch } = useQuery(ACTIVE_SESSION);
+  const [logout] = useMutation(LOG_OUT);
+  const user = session?.currentUser
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -16,17 +21,21 @@ const ProfileMenu = () => {
   };
 
   const handleLogout = e => {
-    e.preventDefault();
-    router.push('/');
+    logout()
+    setOpen(false);
   };
+
+  console.log('user', user);
 
   return (
     <MenuContainer>
       <Select onClick={toggleMenu}>
-        <AvatarImg />
+        {/* <AvatarImg /> */}
         <Username>
           <ArrowDropDownIcon />
-          <span>angry_typer</span>
+          <span>
+            {user.username}
+          </span>
         </Username>
       </Select>
       <Options isOpen={open}>
@@ -63,19 +72,23 @@ export const AvatarImg = styled.div`
 `;
 
 const Username = styled.div`
+  display:flex;
+  align-items: center;
   span {
     padding: .2vh;
-    border-bottom: 1px solid #fafafa;
   }
 
   svg {
     margin-right: 1vh;
-    margin-top: .5vh;
+    /* margin-top: -.5vh; */
+    width: 3vh;
+    height: 3vh;
   }
 
   &:hover {
     color: #cccccc;
     span {
+      margin-bottom: -1px;
       border-bottom: 1px solid #cccccc;
     }
   }
@@ -100,7 +113,6 @@ export const Option = styled.li`
 
   &:hover {
     color: #fafafa;
-    border-bottom: 1px solid #fafafa;
   }
 
   cursor: pointer;

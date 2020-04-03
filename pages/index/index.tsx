@@ -33,8 +33,6 @@ const Index = () => {
     setViewForm(viewForm => !viewForm);
   };
 
-  console.log(session?.currentUser);
-
   if(session?.currentUser)
     return <Play />
 
@@ -56,10 +54,10 @@ const Index = () => {
             <ButtonContainer>
               <Button value="login" onClick={handleClick}>
                 Login
-        </Button>
+              </Button>
               <Button value="register" onClick={handleClick}>
                 Register
-        </Button>
+              </Button>
             </ButtonContainer>
           </>
         }
