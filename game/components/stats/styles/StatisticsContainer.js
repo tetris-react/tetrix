@@ -12,6 +12,10 @@ export const StatisticsContainer = styled(Column)`
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
+    
+    div {
+      height: 7vh;
+    }
 
     span {
       margin-bottom: -.5vh;
@@ -29,8 +33,11 @@ export const StatisticsContainer = styled(Column)`
     justify-content: space-between;
     width: 100%;
 
-    div:last-of-type{
-      align-items: flex-end;
+    div.next-tetrad {
+      margin-left: -5.5vh;
+      width: 127%;
+      height: 14.5vh;
+      min-height: 14.5vh;
     }
 
     div {
@@ -44,13 +51,15 @@ export const StatisticsContainer = styled(Column)`
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        margin-bottom: -.5vh;
+        margin-bottom: 1.2vh;
+        height: 7vh;
       }
 
       hr {
         width: 100%;
+        margin-bottom: 3vh;
       }
-  }
+    }
   }
 
 `;

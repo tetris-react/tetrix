@@ -16,30 +16,61 @@ const Statistics = () => {
           <span>Statistics</span>
           <hr />
           <div>
-            {/* <T width="150" height="50" viewBox="0 0 400 125" /> */}
+            <T
+              id="Ts"
+              width="9vh"
+              height="7vh"
+              viewBox="0 0 175 50"
+              shadowBlur="0"
+            />
             {tetradCount.T}
           </div>
           <div>
-            {/* <Z width="150" height="50" viewBox="0 0 400 125" /> */}
+            <Z width="9vh" height="7vh" viewBox="0 0 175 100" shadowBlur="0" />
             {tetradCount.Z}
           </div>
           <div>
-            {/* <S width="150" height="50" viewBox="0 0 400 125" /> */}
+            <S width="9vh" height="7vh" viewBox="0 0 175 100" shadowBlur="0" />
             {tetradCount.S}
           </div>
           <div>
-            {/* <I width="200" height="50" viewBox="0 0 600 25" /> */}
+            <I
+              width="11vh"
+              height="14vh"
+              viewBox="0 -110 225 100"
+              shadowBlur="0"
+            />
             {tetradCount.I}
           </div>
         </div>
         <div>
-          {nextTetrad?.type === 'T' && <T />}
-          {nextTetrad?.type === 'Z' && <Z />}
-          {nextTetrad?.type === 'S' && <S />}
-          {nextTetrad?.type === 'I' && <I />}
-          {nextTetrad?.type === 'J' && <J />}
-          {nextTetrad?.type === 'O' && <O />}
-          {nextTetrad?.type === 'L' && <L />}
+          <div className="next-tetrad">
+            {nextTetrad?.type === 'T' && <T />}
+            {nextTetrad?.type === 'Z' && <Z />}
+            {nextTetrad?.type === 'S' && <S />}
+            {nextTetrad?.type === 'I' && <I />}
+            {nextTetrad?.type === 'J' && <J />}
+            {nextTetrad?.type === 'O' && <O />}
+            {nextTetrad?.type === 'L' && <L />}
+          </div>
+          <div>
+            <J
+              id="Ts"
+              width="9vh"
+              height="7vh"
+              viewBox="0 0 175 100"
+              shadowBlur="0"
+            />
+            {tetradCount.J}
+          </div>
+          <div>
+            <O width="9vh" height="7vh" viewBox="0 0 175 100" shadowBlur="0" />
+            {tetradCount.O}
+          </div>
+          <div>
+            <L width="9vh" height="7vh" viewBox="0 0 175 100" shadowBlur="0" />
+            {tetradCount.L}
+          </div>
         </div>
       </div>
     </StatisticsContainer>

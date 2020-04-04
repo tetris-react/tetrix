@@ -6,7 +6,8 @@ export const L = ({
   fill = 'none',
   margin = '0',
   padding = '0',
-  viewBox = '-55 5 225 125'
+  viewBox = '-55 5 225 125',
+  shadowBlur = '5'
 }) => {
   return (
     <svg
@@ -66,7 +67,7 @@ export const L = ({
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
           />
           <feOffset />
-          <feGaussianBlur stdDeviation="5" />
+          <feGaussianBlur stdDeviation={shadowBlur} />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 1 0 0 0 0 0.756863 0 0 0 0 0.027451 0 0 0 1 0"
