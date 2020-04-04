@@ -32,8 +32,6 @@ const ProfileMenu = (props) => {
     [data]
   );
 
-  console.log("data", data)
-
   return (
     <MenuContainer>
       {session && 

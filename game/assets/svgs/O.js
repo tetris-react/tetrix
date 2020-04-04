@@ -7,7 +7,8 @@ export const O = ({
   margin = '0',
   padding = '0',
   viewBox = '-105 5 225 125',
-  shadowBlur = '4'
+  shadowBlur = '4',
+  filterID
 }) => {
   return (
     <svg
@@ -20,47 +21,46 @@ export const O = ({
       padding={padding}
       preserveAspectRatio="xMaxYMin meet"
     >
-      <g filter="url(#filterO_d)">
+      <g filter={`url(#filter${filterID}_d)`}>
         <path
           d="M108.5 60.5V109.5H59.5V60.5H108.5Z"
           fill="#FFEB3B"
           stroke="#CCCCCC"
-          stroke-linecap="square"
-          stroke-linejoin="round"
+          strokeLinecap="square"
+          strokeLinejoin="round"
         />
         <path
           d="M59.5 60.5V109.5H10.5V60.5H59.5Z"
           fill="#FFEB3B"
           stroke="#CCCCCC"
-          stroke-linecap="square"
-          stroke-linejoin="round"
+          strokeLinecap="square"
+          strokeLinejoin="round"
         />
         <path
           d="M108.5 10.5V59.5H59.5V10.5H108.5Z"
           fill="#FFEB3B"
           stroke="#CCCCCC"
-          stroke-linecap="square"
-          stroke-linejoin="round"
+          strokeLinecap="square"
+          strokeLinejoin="round"
         />
         <path
           d="M59.5 10.5V59.5H10.5V10.5H59.5Z"
           fill="#FFEB3B"
           stroke="#CCCCCC"
-          stroke-linecap="square"
-          stroke-linejoin="round"
+          strokeLinecap="square"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
         <filter
-          id="filterO_d"
+          id={`filter${filterID}_d`}
           x="0"
           y="0"
-          width="auto"
-          height="auto"
+          length="auto"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

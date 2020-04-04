@@ -1,13 +1,13 @@
 <svg width="168" height="119" viewBox="0 0 168 119" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d)">
-<path d="M108.5 59.5H157.5V108.5H108.5V59.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M59.5 59.5H108.5V108.5H59.5V59.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M59.5 10.5H108.5V59.5H59.5V10.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M10.5 10.5H59.5V59.5H10.5V10.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M108.5 59.5H157.5V108.5H108.5V59.5Z" fill="#F44336" stroke="#CCCCCC" strokeLinecap="square" strokeLinejoin="round"/>
+<path d="M59.5 59.5H108.5V108.5H59.5V59.5Z" fill="#F44336" stroke="#CCCCCC" strokeLinecap="square" strokeLinejoin="round"/>
+<path d="M59.5 10.5H108.5V59.5H59.5V10.5Z" fill="#F44336" stroke="#CCCCCC" strokeLinecap="square" strokeLinejoin="round"/>
+<path d="M10.5 10.5H59.5V59.5H10.5V10.5Z" fill="#F44336" stroke="#CCCCCC" strokeLinecap="square" strokeLinejoin="round"/>
 </g>
 <defs>
-<filter id="filter0_d" x="0" y="0" width="168" height="119" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_d" x="0" y="0" width="168" height="119" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
 <feOffset/>
 <feGaussianBlur stdDeviation="5"/>
