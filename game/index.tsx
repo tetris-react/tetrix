@@ -3,8 +3,8 @@ import { Navigation } from './components';
 import LoginModal from './components/auth/LoginModal';
 import RegisterModal from './components/auth/RegisterModal';
 import RegisterPrompt from './components/auth/RegisterPrompt';
+import Progress from './components/leaderboard/Leaderboard';
 import Playfield from './components/playfield/Playfield';
-import Progress from './components/progress/Progress';
 import ScoreBoard from './components/score/ScoreBoard';
 import Statistics from './components/stats/Statistics';
 import { AppContainer, ButtonDialog } from './styles';
@@ -15,7 +15,7 @@ interface PlayProps {
 }
 
 const Play = (props: PlayProps) => {
-  const [toggleView, setToggleView] = useState('Statistics');
+  const [toggleView, setToggleView] = useState('Leaderboard');
 
   const { refetch, session } = props;
   return (
