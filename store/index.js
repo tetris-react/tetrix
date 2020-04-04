@@ -14,6 +14,8 @@ export default combineReducers({
 *                     ACTION CREATORS                   *
 ********************************************************/
 export {
+  renderLoginModal,
+  renderRegisterModal,
   startGame,
   pauseGame,
   resumeGame,
@@ -39,6 +41,8 @@ export {
 *                       ACTION TYPES                    *
 ********************************************************/
 export {
+  LOGGING_IN,
+  REGISTERING,
   START_GAME,
   PAUSE_GAME,
   RESUME_GAME,

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { restartGame, resumeGame, startGame } from '../../../store';
 
 const ButtonDialog = props => {
+  const { session } = props;
   const dispatch = useDispatch();
   const { gameStarted, gameOver, gamePaused } = useSelector(
     state => state.game
@@ -27,7 +28,7 @@ const ButtonDialog = props => {
   useEffect(
     () => {
       if (gameStarted === false && gameOver === false) {
-        setText("Let's Play");
+        setText('Begin');
         setOpen(true);
       } else if (!gamePaused && gameStarted) {
         setOpen(false);
@@ -59,8 +60,8 @@ const Button = styled.button`
   left: 50%;
   top: 50%;
 
-  width: 43%;
-  height: 60px;
+  width: 25vh;
+  height: 6.5vh;
   background: transparent;
   border: 1px solid #fafafa;
 

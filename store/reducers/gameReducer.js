@@ -6,15 +6,20 @@ import {
   INCREMENT_TETRADS_PROCESSED,
   INCREMENT_TETRIS,
   INCREMENT_TIME,
+  LOGGING_IN,
   PAUSE_GAME,
+  REGISTERING,
   RESTART_GAME,
   RESUME_GAME,
   START_GAME
 } from '../index';
 const initialState = {
+  loggingIn: false,
+  registering: false,
   gameStarted: false,
   gamePaused: false,
   gameOver: false,
+  numGameOver: 0,
   frameRate: G[0],
   rowsCleared: 0,
   level: 0,
@@ -41,10 +46,25 @@ const initialState = {
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOGGING_IN:
+      return {
+        ...state,
+        loggingIn: action.payload.state,
+        registering: false,
+        gamePaused: true
+      };
+    case REGISTERING:
+      return {
+        ...state,
+        registering: action.payload.state,
+        loggingIn: false,
+        gamePaused: true
+      };
     case START_GAME:
       return {
         ...state,
-        gameStarted: true
+        gameStarted: true,
+        gamePaused: false
       };
     case PAUSE_GAME:
       return {
@@ -83,7 +103,8 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         gameStarted: false,
-        gameOver: true
+        gameOver: true,
+        numGameOver: state.numGameOver + 1
       };
     }
     case RESTART_GAME:
@@ -99,6 +120,7 @@ const gameReducer = (state = initialState, action) => {
           L: 0
         },
         gameStarted: true,
+        numGameOver: state.numGameOver,
         topScore: action.payload.topScore
       };
     case CALCULATE_SCORE:
