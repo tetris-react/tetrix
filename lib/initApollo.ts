@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  NormalizedCacheObject,
-} from "apollo-boost";
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from "apollo-boost";
 import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
@@ -22,8 +18,8 @@ interface Options {
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
     // uri: process.env.APOLLO_URI,
-    uri: "https://tetris-back-end.herokuapp.com/graphql",
-    // uri: "http://localhost:4000/graphql",
+    // uri: "https://tetris-back-end.herokuapp.com/graphql",
+    uri: "http://localhost:4000/graphql",
     credentials: "include",
   });
 
