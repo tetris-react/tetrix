@@ -9,7 +9,7 @@ import Timer from './Timer';
 import ViewSelector from './ViewSelector';
 
 const Navigation = props => {
-  const { refetch, session } = props;
+  const { refetch, session, setToggleView } = props;
   const dispatch = useDispatch();
 
   const handleLogin = () => {
@@ -22,7 +22,7 @@ const Navigation = props => {
 
   return (
     <NavContainer>
-      <ViewSelector session={session} />
+      <ViewSelector session={session} setToggleView={setToggleView} />
       <ProfileContainer>
         <Timer />
         {session

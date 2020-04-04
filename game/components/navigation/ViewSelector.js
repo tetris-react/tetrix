@@ -10,8 +10,9 @@ import {
 } from '../../styles';
 
 const ViewSelector = props => {
-  const { session } = props;
+  const { session, setToggleView } = props;
   const [open, setOpen] = useState(false);
+
   const [selection, setSelection] = useState('Statistics');
   const [view, setView] = useState('statistics');
 
@@ -21,6 +22,7 @@ const ViewSelector = props => {
 
   const handleSelection = e => {
     setView(e.target.value);
+    setToggleView(e.target.firstChild.textContent);
     setSelection(e.target.firstChild.textContent);
     setOpen(false);
   };

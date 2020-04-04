@@ -18,8 +18,6 @@ const RegisterPrompt = props => {
     setPromptedToReg(true);
   };
 
-  'numGameOver', numGameOver;
-
   if (session || !gameOver || numGameOver < 2 || promptedToReg) return null;
 
   return (

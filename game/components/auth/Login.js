@@ -39,7 +39,9 @@ const Login = props => {
 
   useEffect(
     () => {
-      if (data) refetch();
+      if (data) {
+        refetch();
+      }
     },
     [data]
   );

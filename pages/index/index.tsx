@@ -16,11 +16,10 @@ import { ACTIVE_SESSION } from '../../queries';
 const Index = () => {
   const {data: session, refetch} = useQuery(ACTIVE_SESSION);
 
-
   const [viewForm, setViewForm] = useState(false);
   const [formType, setFormType] = useState('register');
   const [guestPlay, setGuestPlay] = useState(false);
-
+//
   const startGuestPlay = (e: any) => {
     e.preventDefault();
     setGuestPlay(true);
