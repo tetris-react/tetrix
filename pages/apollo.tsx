@@ -18,7 +18,12 @@ const REGISTER = gql`
 const LOGIN = gql`
   mutation Login($data: LoginInput!) {
     login(data: $data) {
-      username
+      message
+      status
+      user {
+        id
+        username
+      }
     }
   }
 `;
@@ -59,6 +64,8 @@ const Apollo = () => {
     logout,
     { data: logoutData, loading: logoutLoading, error: logoutError },
   ] = useMutation(LOGOUT);
+
+  
   const {
     data: meData,
     loading: meLoading,

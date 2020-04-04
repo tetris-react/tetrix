@@ -10,15 +10,19 @@ export const COLLAPSE_ROWS = 'COLLAPSE_ROWS';
 export const SPAWN_COLISSION_DETECTED = 'SPAWN_COLISSION_DETECTED';
 
 export const spawnTetrad = (lastType = '') => (dispatch, state) => {
-  let { matrix, tetrad } = state().playfield;
-  tetrad = getRandomTetrad(lastType);
+  let { matrix, tetrad, nextTetrad } = state().playfield;
+
+  tetrad = nextTetrad ? nextTetrad : getRandomTetrad(lastType);
+  nextTetrad = getRandomTetrad(tetrad.type);
+
   matrix = matrix.activateCoordinates(tetrad);
 
   dispatch({
     type: SPAWN_TETRAD,
     payload: {
       matrix: matrix,
-      tetrad: tetrad
+      tetrad: tetrad,
+      nextTetrad: nextTetrad
     }
   });
 

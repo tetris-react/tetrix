@@ -15,6 +15,7 @@ import {
 const initialState = {
   matrix: new Matrix(NUM_ROWS, NUM_COLS),
   tetrad: new Tetrad(),
+  nextTetrad: null,
   tetradLocked: false,
   spawnCollisions: 0,
   deletedRows: [],
@@ -28,6 +29,7 @@ const playfieldReducer = (state = initialState, action) => {
         ...state,
         matrix: action.payload.matrix,
         tetrad: action.payload.tetrad,
+        nextTetrad: action.payload.nextTetrad,
         deletedRows: [],
         rowsSkipped: 0,
         tetradLocked: false
@@ -63,7 +65,8 @@ const playfieldReducer = (state = initialState, action) => {
       return {
         ...initialState,
         matrix: new Matrix(NUM_ROWS, NUM_COLS),
-        tetrad: new Tetrad()
+        tetrad: new Tetrad(),
+        nextTetrad: null
       };
     }
     case DELETE_ROW:

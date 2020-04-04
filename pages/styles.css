@@ -6,7 +6,8 @@ html {
   background: #212121;
   font-size: 62.5%;
 
-  background: url(../game/assets/background.png) no-repeat center center fixed;
+  background: url(../game/assets/pngs/default-background.png) no-repeat center
+    center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
