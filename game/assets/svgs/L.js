@@ -1,23 +1,25 @@
 import React from 'react';
 
 export const L = ({
-  width = '169',
-  height = '120',
+  width = '26.0vh',
+  height = '15.0vh',
   fill = 'none',
   margin = '0',
   padding = '0',
-  viewBox = '0 0 169 120'
+  viewBox = '-55 5 225 125'
 }) => {
   return (
     <svg
+      // style={{ border: '1px solid white' }}
       width={width}
       height={height}
       viewBox={viewBox}
       fill={fill}
       margin={margin}
       padding={padding}
+      preserveAspectRatio="xMaxYMin meet"
     >
-      <g filter="url(#filter0_d)">
+      <g filter="url(#filterL_d)">
         <path
           d="M60 109H11L11 60H60V109Z"
           fill="#FFC107"
@@ -49,11 +51,11 @@ export const L = ({
       </g>
       <defs>
         <filter
-          id="filter0_d"
-          x="0.5"
-          y="0.5"
-          width="168"
-          height="119"
+          id="filterL_d"
+          x="0"
+          y="0"
+          width="auto"
+          height="auto"
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >

@@ -1,47 +1,49 @@
 import React from 'react';
 
 export const S = ({
-  width = '168',
-  height = '119',
+  width = '26.0vh',
+  height = '15.0vh',
   fill = 'none',
   margin = '0',
   padding = '0',
-  viewBox = '0 0 168 119'
+  viewBox = '-55 5 225 125'
 }) => {
   return (
     <svg
+      // style={{ border: '1px solid white' }}
       width={width}
       height={height}
       viewBox={viewBox}
       fill={fill}
       margin={margin}
       padding={padding}
+      preserveAspectRatio="xMaxYMin meet"
     >
-      <g filter="url(#filter0_d)">
+      <g filter="url(#filterS_d)">
         <path
-          d="M108.5 59.5H157.5V108.5H108.5V59.5Z"
-          fill="#03A9F4"
+          d="M158 11V60H109V11L158 11Z"
+          fill="#8BC34A"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
-          d="M59.5 59.5H108.5V108.5H59.5V59.5Z"
-          fill="#03A9F4"
+          d="M109 11V60H60V11L109 11Z"
+          fill="#8BC34A"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
-          d="M59.5 10.5H108.5V59.5H59.5V10.5Z"
-          fill="#03A9F4"
+          d="M109 60V109H60V60H109Z"
+          fill="#8BC34A"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
-          d="M10.5 10.5H59.5V59.5H10.5V10.5Z"
-          fill="#03A9F4"
+          d="M60 60V109H11V60H60Z"
+          fill="#8BC34A"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
@@ -49,11 +51,11 @@ export const S = ({
       </g>
       <defs>
         <filter
-          id="filter0_d"
+          id="filterS_d"
           x="0"
           y="0"
-          width="168"
-          height="119"
+          width="auto"
+          height="auto"
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >
@@ -67,7 +69,7 @@ export const S = ({
           <feGaussianBlur stdDeviation="5" />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 0.0117647 0 0 0 0 0.662745 0 0 0 0 0.956863 0 0 0 1 0"
+            values="0 0 0 0 0.545098 0 0 0 0 0.764706 0 0 0 0 0.290196 0 0 0 1 0"
           />
           <feBlend
             mode="normal"

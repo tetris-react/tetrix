@@ -1,17 +1,17 @@
-<svg width="169" height="120" viewBox="0 0 169 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="168" height="119" viewBox="0 0 168 119" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d)">
-<path d="M158 11V60H109V11L158 11Z" fill="#4CAF50" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M109 11V60H60V11L109 11Z" fill="#4CAF50" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M109 60V109H60V60H109Z" fill="#4CAF50" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M60 60V109H11V60H60Z" fill="#4CAF50" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M108.5 59.5H157.5V108.5H108.5V59.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M59.5 59.5H108.5V108.5H59.5V59.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M59.5 10.5H108.5V59.5H59.5V10.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M10.5 10.5H59.5V59.5H10.5V10.5Z" fill="#F44336" stroke="#CCCCCC" stroke-linecap="square" stroke-linejoin="round"/>
 </g>
 <defs>
-<filter id="filter0_d" x="0.5" y="0.5" width="168" height="119" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_d" x="0" y="0" width="168" height="119" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
 <feOffset/>
 <feGaussianBlur stdDeviation="5"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.374083 0 0 0 0 0.847162 0 0 0 0 0.332946 0 0 0 1 0"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.956863 0 0 0 0 0.262745 0 0 0 0 0.211765 0 0 0 1 0"/>
 <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
 </filter>

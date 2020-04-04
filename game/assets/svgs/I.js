@@ -1,47 +1,49 @@
 import React from 'react';
 
 export const I = ({
-  width = '218',
-  height = '71',
+  width = '26.0vh',
+  height = '15.0vh',
   fill = 'none',
   margin = '0',
   padding = '0',
-  viewBox = '0 0 218 71'
+  viewBox = '-10 5 225 125'
 }) => {
   return (
     <svg
+      // style={{ border: '1px solid white' }}
       width={width}
       height={height}
       viewBox={viewBox}
       fill={fill}
       margin={margin}
       padding={padding}
+      preserveAspectRatio="xMaxYMin meet"
     >
-      <g filter="url(#filter0_d)">
+      <g filter="url(#filterI_d)">
         <path
           d="M11 11H60V60H11L11 11Z"
-          fill="#03A9F4"
+          fill="#00BCD4"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
           d="M60 11H109V60H60V11Z"
-          fill="#03A9F4"
+          fill="#00BCD4"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
           d="M109 11H158V60H109V11Z"
-          fill="#03A9F4"
+          fill="#00BCD4"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
           d="M158 11H207V60H158V11Z"
-          fill="#03A9F4"
+          fill="#00BCD4"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
@@ -49,11 +51,11 @@ export const I = ({
       </g>
       <defs>
         <filter
-          id="filter0_d"
-          x="0.5"
-          y="0.5"
-          width="217"
-          height="70"
+          id="filterI_d"
+          x="0"
+          y="0"
+          width="auto"
+          height="auto"
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >
@@ -67,7 +69,7 @@ export const I = ({
           <feGaussianBlur stdDeviation="5" />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 0.0117647 0 0 0 0 0.662745 0 0 0 0 0.956863 0 0 0 1 0"
+            values="0 0 0 0 0 0 0 0 0 0.737255 0 0 0 0 0.831373 0 0 0 1 0"
           />
           <feBlend
             mode="normal"

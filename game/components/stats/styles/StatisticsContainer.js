@@ -2,37 +2,55 @@ import styled from 'styled-components';
 import { Column } from '../../../styles';
 
 export const StatisticsContainer = styled(Column)`
-  align-items: flex-start;
+
   padding: 8vh 4vh;
   font-size: 3.0vh;
   color: #FAFAFA;
 
-  section {
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     width: 100%;
 
-    div {
-      display:flex;
-      justify-content: flex-end;
+    span {
+      margin-bottom: -.5vh;
     }
 
     hr {
       width: 100%;
     }
   }
+  
 
-  section:last-of-type {
-    width: 50%;
+  div:last-of-type {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+
+    div:last-of-type{
+      align-items: flex-end;
+    }
 
     div {
-      display:flex;
-      justify-content: flex-start;
-    }
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 40%;
+
+      div {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: -.5vh;
+      }
+
+      hr {
+        width: 100%;
+      }
+  }
   }
 
-  > div {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    margin-bottom: 10px;
-  }
 `;

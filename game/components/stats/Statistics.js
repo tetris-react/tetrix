@@ -7,9 +7,31 @@ const Statistics = () => {
   const { nextTetrad } = useSelector(state => state.playfield);
   return (
     <StatisticsContainer>
-      <section>
-        <div>Next Tetrad</div>
+      <div>
+        <span>Next Tetrad </span>
         <hr />
+      </div>
+      <div>
+        <div>
+          <span>Statistics</span>
+          <hr />
+          <div>
+            {/* <T width="150" height="50" viewBox="0 0 400 125" /> */}
+            {tetradCount.T}
+          </div>
+          <div>
+            {/* <Z width="150" height="50" viewBox="0 0 400 125" /> */}
+            {tetradCount.Z}
+          </div>
+          <div>
+            {/* <S width="150" height="50" viewBox="0 0 400 125" /> */}
+            {tetradCount.S}
+          </div>
+          <div>
+            {/* <I width="200" height="50" viewBox="0 0 600 25" /> */}
+            {tetradCount.I}
+          </div>
+        </div>
         <div>
           {nextTetrad?.type === 'T' && <T />}
           {nextTetrad?.type === 'Z' && <Z />}
@@ -19,55 +41,22 @@ const Statistics = () => {
           {nextTetrad?.type === 'O' && <O />}
           {nextTetrad?.type === 'L' && <L />}
         </div>
-      </section>
-      <section>
-        <div>Statistics</div>
-        <hr />
-      </section>
-      <div>
-        <span>T</span>
-        <span>
-          {tetradCount['T']}
-        </span>
-      </div>
-      <div>
-        <span>Z</span>
-        <span>
-          {tetradCount['Z']}
-        </span>
-      </div>
-      <div>
-        <span>S</span>
-        <span>
-          {tetradCount['S']}
-        </span>
-      </div>
-      <div>
-        <span>I</span>
-        <span>
-          {tetradCount['I']}
-        </span>
-      </div>
-      <div>
-        <span>J</span>
-        <span>
-          {tetradCount['J']}
-        </span>
-      </div>
-      <div>
-        <span>O</span>
-        <span>
-          {tetradCount['O']}
-        </span>
-      </div>
-      <div>
-        <span>L</span>
-        <span>
-          {tetradCount['L']}
-        </span>
       </div>
     </StatisticsContainer>
   );
 };
 
 export default Statistics;
+
+/*
+<div>
+          {nextTetrad?.type === 'T' && <T />}
+          {nextTetrad?.type === 'Z' && <Z />}
+          {nextTetrad?.type === 'S' && <S />}
+          {nextTetrad?.type === 'I' && <I />}
+          {nextTetrad?.type === 'J' && <J />}
+          {nextTetrad?.type === 'O' && <O />}
+          {nextTetrad?.type === 'L' && <L />}
+        </div>
+
+*/

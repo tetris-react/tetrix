@@ -1,47 +1,49 @@
 import React from 'react';
 
 export const Z = ({
-  width = '169',
-  height = '120',
+  width = '26.0vh',
+  height = '15.0vh',
   fill = 'none',
   margin = '0',
   padding = '0',
-  viewBox = '0 0 169 120'
+  viewBox = '-55 5 225 125'
 }) => {
   return (
     <svg
+      // style={{ border: '1px solid white' }}
       width={width}
       height={height}
       viewBox={viewBox}
       fill={fill}
       margin={margin}
       padding={padding}
+      preserveAspectRatio="xMaxYMin meet"
     >
-      <g filter="url(#filter0_d)">
+      <g filter="url(#filterZ_d)">
         <path
-          d="M158 11V60H109V11L158 11Z"
-          fill="#4CAF50"
+          d="M108.5 59.5H157.5V108.5H108.5V59.5Z"
+          fill="#F44336"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
-          d="M109 11V60H60V11L109 11Z"
-          fill="#4CAF50"
+          d="M59.5 59.5H108.5V108.5H59.5V59.5Z"
+          fill="#F44336"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
-          d="M109 60V109H60V60H109Z"
-          fill="#4CAF50"
+          d="M59.5 10.5H108.5V59.5H59.5V10.5Z"
+          fill="#F44336"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
         />
         <path
-          d="M60 60V109H11V60H60Z"
-          fill="#4CAF50"
+          d="M10.5 10.5H59.5V59.5H10.5V10.5Z"
+          fill="#F44336"
           stroke="#CCCCCC"
           stroke-linecap="square"
           stroke-linejoin="round"
@@ -49,11 +51,11 @@ export const Z = ({
       </g>
       <defs>
         <filter
-          id="filter0_d"
-          x="0.5"
-          y="0.5"
-          width="168"
-          height="119"
+          id="filterZ_d"
+          x="0"
+          y="0"
+          width="auto"
+          height="auto"
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >
@@ -67,7 +69,7 @@ export const Z = ({
           <feGaussianBlur stdDeviation="5" />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 0.374083 0 0 0 0 0.847162 0 0 0 0 0.332946 0 0 0 1 0"
+            values="0 0 0 0 0.956863 0 0 0 0 0.262745 0 0 0 0 0.211765 0 0 0 1 0"
           />
           <feBlend
             mode="normal"
