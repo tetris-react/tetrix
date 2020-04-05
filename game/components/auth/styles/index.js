@@ -16,11 +16,6 @@ export const Form = styled.form`
     font-size: 1.3vh;
   }
 
-  span:last-of-type {
-    color: #fafafa;
-    margin-bottom: 1vh;
-  }
-
   /* border: 1px solid #fafafa; */
 `;
 

@@ -1,32 +1,24 @@
-import moment from 'moment-timezone';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
-import { indigo } from '@material-ui/core/colors';
 import { REGISTER } from '../../../queries';
 import { renderRegisterModal } from '../../../store';
-import Register from '../auth/Register';
 import { Button, ButtonContainer, Form, Input } from './styles';
 
-const tzName = moment.tz.guess();
-const tzAbbr = moment.tz(tzName).format('Z');
-
-const initialFormState = {
-  username: '',
-  password: '',
-  email: ''
-}
-
-const RegisterModal = (props) => {
+const UpdatePassword = (props) => {
   const { refetch } = props;
   const dispatch = useDispatch();
   const { registering } = useSelector(state => state.game);
   const [errors, setErrors] = useState({});
   const [register, { data, loading, error }] = useMutation(REGISTER);
 
-  const [user, setUser] = useState(initialFormState);
+  const [user, setUser] = useState({
+    password: '',
+    confirm: '',
+    email: ''
+  });
 
   const handleChange = e => {
     setUser({
@@ -37,29 +29,24 @@ const RegisterModal = (props) => {
 
   const handleGoBack = e => {
     dispatch(renderRegisterModal(false));
-    setUser(initialFormState)
   };
 
   const handleRegister = async e => {
     e.preventDefault();
-    // console.log('user', user);
-    // console.log('email', user.email === '' ? undefined : user.email);
-    let newErrors = {};
+    let newErrors = { ...errors };
     try {
       await register({
         variables: {
           data: {
             username: user.username,
             password: user.password,
-            email: user.email === '' ? undefined : user.email,
+            email: user.email,
             tzName: tzName,
             tzAbv: tzAbbr
           }
         }
       });
     } catch (err) {
-      // console.log("err", err);
-      // console.log("err?.graphQLErrors", err?.graphQLErrors);
       err.graphQLErrors[0].extensions.exception.validationErrors.forEach(
         validationError => {
           Object.values(validationError.constraints).forEach(message => {
@@ -67,10 +54,12 @@ const RegisterModal = (props) => {
           });
         }
       );
-      // console.log(err?.graphQLErrors);
-    } finally {
-      setErrors(newErrors);
+      console.log(err?.graphQLErrors);
     }
+
+    setErrors(newErrors);
+
+
 
   };
 
@@ -82,14 +71,9 @@ const RegisterModal = (props) => {
   );
 
   useEffect(() => {
-    if (!Object.keys(errors).length) {
+    if (!error)
       dispatch(renderRegisterModal(false));
-      setUser(initialFormState)
-    }
-
-  }, [errors, dispatch])
-
-  // console.log("errors", errors);
+  }, [error])
 
   if (!registering) return null;
 
@@ -106,7 +90,7 @@ const RegisterModal = (props) => {
           disabled={loading}
         />
         <span>
-          {errors?.username}
+          {errors.username}
         </span>
         <Input
           type="password"
@@ -117,7 +101,7 @@ const RegisterModal = (props) => {
           disabled={loading}
         />
         <span>
-          {errors?.password}
+          {errors.password}
         </span>
         <Input
           type="email"
@@ -127,13 +111,10 @@ const RegisterModal = (props) => {
           onChange={handleChange}
           disabled={loading}
         />
-        <span>
-          {errors?.email}
-        </span>
         {!loading &&
           <>
             <span>
-              Only used for password recovery, and can be updated in user settings.
+              Only used for password reset, and can be updated in user settings.
             </span>
             <ButtonContainer>
               <Button type="button" onClick={handleGoBack}>
@@ -187,12 +168,7 @@ const ModalContainer = styled.div`
         font-size:1.2vh;
       }
     }
-
-    span:last-of-type {
-      color: #fafafa;
-      margin-bottom: 1vh;
-    }
   }
 `;
 
-export default RegisterModal;
+export default UpdatePassword;

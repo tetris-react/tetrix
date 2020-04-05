@@ -16,19 +16,23 @@ import {
   ForgetButtonContainer,
 } from "./styles";
 
+const initialFormState = {
+  username: "",
+  password: "",
+};
+
 const LoginModal = (props) => {
   const { refetch } = props;
   const dispatch = useDispatch();
   const [login, { data, loading, error }] = useMutation(LOGIN);
   const { loggingIn } = useSelector((state) => state.game);
   const [errors, setErrors] = useState({});
+  const [loginMessage, setLoginMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState("");
 
   const [toggle, handleForgotPassword] = useHandleForgotPassword();
 
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-  });
+  const [user, setUser] = useState(initialFormState);
 
   const handleChange = (e) => {
     setUser({
@@ -39,29 +43,48 @@ const LoginModal = (props) => {
 
   const handleGoBack = (e) => {
     dispatch(renderLoginModal(false));
+    setUser(initialFormState);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let newErrors = { ...errors };
+    let newErrors = {};
 
-    login({
-      variables: {
-        data: {
-          username: user.username,
-          password: user.password,
+    try {
+      const res = await login({
+        variables: {
+          data: {
+            username: user.username,
+            password: user.password,
+          },
         },
-      },
-    });
-
-    setErrors(newErrors);
-
-    if (!error) dispatch(renderLoginModal(false));
+      });
+      setLoginSuccess(res?.data?.login?.status);
+      return setLoginMessage(res?.data?.login?.message);
+    } catch (err) {
+      err.graphQLErrors[0].extensions.exception.validationErrors.forEach((validationError) => {
+        Object.values(validationError.constraints).forEach((message) => {
+          newErrors[validationError.property] = message;
+        });
+      });
+    } finally {
+      setErrors(newErrors);
+      setUser(initialFormState);
+    }
   };
 
   useEffect(() => {
     if (data) refetch();
   }, [data]);
+
+  useEffect(() => {
+    if (loginSuccess) {
+      dispatch(renderLoginModal(false));
+      setUser(initialFormState);
+    }
+  }, [loginSuccess]);
+
+  console.log("errors", errors);
 
   if (!loggingIn) return null;
 
@@ -72,6 +95,7 @@ const LoginModal = (props) => {
       ) : (
         <Form>
           <h1>Login</h1>
+          <span>{!loginSuccess ? loginMessage : ""}</span>
           <Input
             type="text"
             name="username"

@@ -51,3 +51,59 @@ export const ACTIVE_SESSION = gql`
     }
   }
 `;
+
+export const ADD_GAME_RECORD = gql`
+  mutation AddGameRecord($data: AddGameRecordInput!) {
+    addGameRecord(data: $data) {
+      id
+      score
+      level
+      lines
+      isPrivate
+      numTetris
+      tetrisRate
+      attackPerSecond
+      attackPerMinute
+      processedPerSecond
+      processedPerMinute
+      date
+      user {
+        id
+        username
+        email
+        country
+        tzAbv
+        tzName
+        isPrivate
+      }
+    }
+  }
+`;
+
+export const LEADER_BOARD = gql`
+  query LeaderBoard {
+    leaderBoard {
+      id
+      score
+      lines
+      level
+      isPrivate
+      numTetris
+      tetrisRate
+      attackPerSecond
+      attackPerMinute
+      processedPerSecond
+      processedPerMinute
+      date
+      user {
+        id
+        username
+        email
+        country
+        tzAbv
+        tzName
+        isPrivate
+      }
+    }
+  }
+`;

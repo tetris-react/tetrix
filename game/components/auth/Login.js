@@ -14,15 +14,19 @@ import styled from "styled-components";
 import { useHandleForgotPassword } from "../../hooks";
 import SendForgotPasswordEmail from "./SendForgotPasswordEmail";
 
+const initialFormState = {
+  username: "",
+  password: "",
+};
+
 const Login = (props) => {
   const { refetch } = props;
   const [errors, setErrors] = useState({});
   const [login, { data, loading, error }] = useMutation(LOGIN);
+  const [loginMessage, setLoginMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState("");
 
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-  });
+  const [user, setUser] = useState(initialFormState);
 
   const [toggle, handleForgotPassword] = useHandleForgotPassword();
 
@@ -35,25 +39,35 @@ const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newErrors = { ...errors };
-
-    login({
-      variables: {
-        data: {
-          username: user.username,
-          password: user.password,
+    let newErrors = {};
+    try {
+      const res = await login({
+        variables: {
+          data: {
+            username: user.username,
+            password: user.password,
+          },
         },
-      },
-    });
-
-    setErrors(newErrors);
+      });
+      setLoginSuccess(res?.data?.login?.status);
+      return setLoginMessage(res?.data?.login?.message);
+    } catch (err) {
+      err.graphQLErrors[0].extensions.exception.validationErrors.forEach((validationError) => {
+        Object.values(validationError.constraints).forEach((message) => {
+          newErrors[validationError.property] = message;
+        });
+      });
+    } finally {
+      setErrors(newErrors);
+      setUser(initialFormState);
+    }
   };
 
   useEffect(() => {
-    if (data) {
+    if (loginSuccess) {
       refetch();
     }
-  }, [data]);
+  }, [loginSuccess]);
 
   return (
     <>

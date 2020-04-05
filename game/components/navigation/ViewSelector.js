@@ -13,8 +13,8 @@ const ViewSelector = props => {
   const { session, setToggleView } = props;
   const [open, setOpen] = useState(false);
 
-  const [selection, setSelection] = useState('Statistics');
-  const [view, setView] = useState('statistics');
+  const [selection, setSelection] = useState('Leaderboard');
+  const [view, setView] = useState('leader-board');
 
   const toggleMenu = e => {
     setOpen(open => !open);
