@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { renderRegisterModal } from '../../../store';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { renderRegisterModal } from "../../../store";
 
-const RegisterPrompt = props => {
+const RegisterPrompt = (props) => {
   const { session } = props;
   const dispatch = useDispatch();
-  const { gameOver, numGameOver } = useSelector(state => state.game);
+  const { gameOver, numGameOver } = useSelector((state) => state.game);
   const [promptedToReg, setPromptedToReg] = useState(false);
 
   const displayRegisterForm = () => {
@@ -40,7 +40,7 @@ const ModalContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 100%;
+  // width: 50%;
   left: calc(100% / 3);
   max-width: calc(100% / 3);
 
@@ -49,15 +49,15 @@ const ModalContainer = styled.div`
   background: #212121;
   text-align: center;
   p {
-    font-size: 3.0vh;
+    font-size: 3vh;
     color: #fafafa;
-    margin-bottom: .5vh;
+    margin-bottom: 0.5vh;
   }
 
   p:last-of-type {
     font-size: 1.8vh;
     color: #fafafa;
-    margin-bottom: .5vh;
+    margin-bottom: 0.5vh;
   }
 `;
 
@@ -67,13 +67,14 @@ const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 45vh;
+  width: 90%;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 40vh;
+  flex-direction: column;
+  // justify-content: space-between;
+  width: 90%;
 
   margin-top: 5vh;
 `;
@@ -86,7 +87,7 @@ const Button = styled.button`
   padding: 1vh;
 
   color: #fafafa;
-  font-size: 2.0vh;
+  font-size: 2vh;
 
   cursor: pointer;
 
