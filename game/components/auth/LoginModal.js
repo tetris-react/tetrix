@@ -7,6 +7,11 @@ import { LOGIN } from '../../../queries';
 import { renderLoginModal } from '../../../store';
 import { Button, ButtonContainer, Form, Input } from './styles';
 
+const initialFormState = {
+  username: '',
+  password: ''
+}
+
 const LoginModal = props => {
   const { refetch } = props;
   const dispatch = useDispatch();
@@ -16,10 +21,7 @@ const LoginModal = props => {
   const [loginMessage, setLoginMessage] = useState('');
   const [loginSuccess, setLoginSuccess] = useState('');
 
-  const [user, setUser] = useState({
-    username: '',
-    password: ''
-  });
+  const [user, setUser] = useState(initialFormState);
 
   const handleChange = e => {
     setUser({
@@ -30,11 +32,12 @@ const LoginModal = props => {
 
   const handleGoBack = e => {
     dispatch(renderLoginModal(false));
+    setUser(initialFormState)
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let newErrors = { ...errors };
+    let newErrors = {};
 
     try {
       const res = await login({
@@ -56,9 +59,10 @@ const LoginModal = props => {
           });
         }
       );
+    } finally {
+      setErrors(newErrors);
+      setUser(initialFormState)
     }
-
-    setErrors(newErrors);
   };
 
   useEffect(
@@ -70,10 +74,15 @@ const LoginModal = props => {
 
   useEffect(
     () => {
-      if (loginSuccess) dispatch(renderLoginModal(false));
+      if (loginSuccess) {
+        dispatch(renderLoginModal(false));
+        setUser(initialFormState);
+      } 
     },
     [loginSuccess]
   );
+
+  console.log("errors", errors);
 
   if (!loggingIn) return null;
 
