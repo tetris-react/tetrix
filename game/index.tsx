@@ -18,6 +18,7 @@ interface PlayProps {
 }
 
 const Play = (props: PlayProps) => {
+  const { refetch, session } = props;
   const [addGameRecord] = useMutation(ADD_GAME_RECORD);
   const { data, refetch: refetchLeaderBoard } = useQuery(LEADER_BOARD);
   const {
@@ -56,7 +57,7 @@ const Play = (props: PlayProps) => {
     [gameOver]
   );
 
-  const { refetch, session } = props;
+  console.log('data', data);
 
   return (
     <AppContainer>
@@ -71,9 +72,13 @@ const Play = (props: PlayProps) => {
       <Playfield />
       <ScoreBoard />
       <ButtonDialog session={session} />
-      <RegisterModal refetch={refetch} session={session} />
+      <RegisterModal
+        refetch={refetch}
+        session={session}
+        refetchLeaderBoard={refetchLeaderBoard}
+      />
       <RegisterPrompt session={session} />
-      <LoginModal refetch={refetch} />
+      <LoginModal refetch={refetch} refetchLeaderBoard={refetchLeaderBoard} />
     </AppContainer>
   );
 };
