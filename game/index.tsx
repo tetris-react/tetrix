@@ -1,3 +1,4 @@
+import moment from 'moment-timezone';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-apollo';
 import { useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import LoginModal from './components/auth/LoginModal';
 import RegisterModal from './components/auth/RegisterModal';
 import RegisterPrompt from './components/auth/RegisterPrompt';
 import Leaderboard from './components/leaderboard/Leaderboard';
+import PersonalBest from './components/personal-best/PersonalBest';
 import Playfield from './components/playfield/Playfield';
 import ScoreBoard from './components/score/ScoreBoard';
 import Statistics from './components/stats/Statistics';
@@ -18,6 +20,7 @@ interface PlayProps {
 }
 
 const Play = (props: PlayProps) => {
+  const { refetch, session } = props;
   const [addGameRecord] = useMutation(ADD_GAME_RECORD);
   const { data, refetch: refetchLeaderBoard } = useQuery(LEADER_BOARD);
   const {
@@ -40,13 +43,15 @@ const Play = (props: PlayProps) => {
               level: level,
               lines: rowsCleared,
               numTetris: tetrisNum,
-              tetrisRate: tetrisRate
+              tetrisRate: tetrisRate,
+              date: moment().utc().format()
             }
           }
         })
           .then(res => {
             console.log('res', res);
             refetchLeaderBoard();
+            refetch();
           })
           .catch((err: any) => {
             console.log(err);
@@ -56,8 +61,6 @@ const Play = (props: PlayProps) => {
     [gameOver]
   );
 
-  const { refetch, session } = props;
-
   return (
     <AppContainer>
       <Navigation
@@ -65,15 +68,19 @@ const Play = (props: PlayProps) => {
         session={session}
         setToggleView={setToggleView}
       />
-      {toggleView === 'Statistics'
-        ? <Statistics />
-        : <Leaderboard data={data} />}
+      {toggleView === 'Statistics' && <Statistics />}
+      {toggleView === 'Leaderboard' && <Leaderboard data={data} />}
+      {toggleView === 'Personal Best' && <PersonalBest session={session} />}
       <Playfield />
       <ScoreBoard />
       <ButtonDialog session={session} />
-      <RegisterModal refetch={refetch} session={session} />
+      <RegisterModal
+        refetch={refetch}
+        session={session}
+        refetchLeaderBoard={refetchLeaderBoard}
+      />
       <RegisterPrompt session={session} />
-      <LoginModal refetch={refetch} />
+      <LoginModal refetch={refetch} refetchLeaderBoard={refetchLeaderBoard} />
     </AppContainer>
   );
 };
