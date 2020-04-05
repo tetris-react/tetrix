@@ -20,7 +20,7 @@ const initialFormState = {
 }
 
 const RegisterModal = (props) => {
-  const { refetch } = props;
+  const { refetch, refetchLeaderBoard } = props;
   const dispatch = useDispatch();
   const { registering } = useSelector(state => state.game);
   const [errors, setErrors] = useState({});
@@ -83,11 +83,12 @@ const RegisterModal = (props) => {
 
   useEffect(() => {
     if (!Object.keys(errors).length) {
+      refetchLeaderBoard()
       dispatch(renderRegisterModal(false));
       setUser(initialFormState)
     }
 
-  }, [errors, dispatch])
+  }, [errors, refetchLeaderBoard, dispatch])
 
   // console.log("errors", errors);
 

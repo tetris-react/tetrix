@@ -46,7 +46,9 @@ export const ACTIVE_SESSION = gql`
         score
         level
         lines
-        isPrivate
+        numTetris
+        tetrisRate
+        date
       }
     }
   }

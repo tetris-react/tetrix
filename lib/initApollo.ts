@@ -17,8 +17,8 @@ interface Options {
 
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
-    // uri: "https://tetris-back-end.herokuapp.com/graphql",
+    // uri: 'http://localhost:4000/graphql',
+    uri: "https://tetris-back-end.herokuapp.com/graphql",
     credentials: "include",
   });
 

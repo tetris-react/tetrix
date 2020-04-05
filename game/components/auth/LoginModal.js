@@ -22,7 +22,7 @@ const initialFormState = {
 };
 
 const LoginModal = (props) => {
-  const { refetch } = props;
+  const { refetch, refetchLeaderBoard } = props;
   const dispatch = useDispatch();
   const [login, { data, loading, error }] = useMutation(LOGIN);
   const { loggingIn } = useSelector((state) => state.game);
@@ -79,12 +79,11 @@ const LoginModal = (props) => {
 
   useEffect(() => {
     if (loginSuccess) {
+      refetchLeaderBoard();
       dispatch(renderLoginModal(false));
       setUser(initialFormState);
     }
-  }, [loginSuccess]);
-
-  console.log("errors", errors);
+  }, [loginSuccess, refetchLeaderBoard, dispatch]);
 
   if (!loggingIn) return null;
 
