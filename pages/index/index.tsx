@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import Play from '../../game';
-import Login from '../../game/components/auth/Login';
-import Register from '../../game/components/auth/Register';
+import React, { useState } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import Play from "../../game";
+import Login from "../../game/components/auth/Login";
+import Register from "../../game/components/auth/Register";
 import {
   Banner,
   Button,
   ButtonContainer,
   Content,
   LandingContainer,
-  Link
-} from '../../game/styles';
-import { ACTIVE_SESSION } from '../../queries';
+  Link,
+} from "../../game/styles";
+import { ACTIVE_SESSION } from "../../queries";
 
 const Index = () => {
-  const {data: session, refetch} = useQuery(ACTIVE_SESSION);
+  const { data: session, refetch } = useQuery(ACTIVE_SESSION);
 
   const [viewForm, setViewForm] = useState(false);
-  const [formType, setFormType] = useState('register');
+  const [formType, setFormType] = useState("register");
   const [guestPlay, setGuestPlay] = useState(false);
-//
+  //
   const startGuestPlay = (e: any) => {
     e.preventDefault();
     setGuestPlay(true);
@@ -28,11 +28,10 @@ const Index = () => {
   const handleClick = (e: any) => {
     e.preventDefault();
     setFormType(e.target.value);
-    setViewForm(viewForm => !viewForm);
+    setViewForm((viewForm) => !viewForm);
   };
 
-  if (session?.currentUser || guestPlay)
-    return <Play session={session} refetch={refetch}/>
+  if (session?.currentUser || guestPlay) return <Play session={session} refetch={refetch} />;
 
   return (
     <LandingContainer>
@@ -40,14 +39,16 @@ const Index = () => {
         <h1>Tetrix</h1>
       </Banner>
       <Content>
-        {viewForm ?
-          formType === "register"
-            ? <Register setViewForm={setViewForm} refetch={refetch}/>
-            : <Login setViewForm={setViewForm} refetch={refetch}/>
-          : null}
-        {!viewForm &&
+        {viewForm ? (
+          formType === "register" ? (
+            <Register setViewForm={setViewForm} refetch={refetch} />
+          ) : (
+            <Login setViewForm={setViewForm} refetch={refetch} />
+          )
+        ) : null}
+        {!viewForm && (
           <>
-          <Link onClick={startGuestPlay}>Play Now</Link>
+            <Link onClick={startGuestPlay}>Play Now</Link>
             <ButtonContainer>
               <Button value="login" onClick={handleClick}>
                 Login
@@ -57,7 +58,7 @@ const Index = () => {
               </Button>
             </ButtonContainer>
           </>
-        }
+        )}
       </Content>
     </LandingContainer>
   );

@@ -1,27 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { PropagateLoader } from 'react-spinners';
-import { useMutation } from '@apollo/react-hooks';
-import { LOGIN } from '../../../queries';
-import { Button, ButtonContainer, Form, Input } from './styles';
+import React, { useEffect, useState } from "react";
+import { PropagateLoader } from "react-spinners";
+import { useMutation } from "@apollo/react-hooks";
+import { LOGIN } from "../../../queries";
+import {
+  Button,
+  ButtonContainer,
+  Form,
+  Input,
+  ForgetfulButton,
+  ForgetButtonContainer,
+} from "./styles";
+import styled from "styled-components";
+import { useHandleForgotPassword } from "../../hooks";
+import SendForgotPasswordEmail from "./SendForgotPasswordEmail";
 
-const Login = props => {
+const Login = (props) => {
   const { refetch } = props;
   const [errors, setErrors] = useState({});
   const [login, { data, loading, error }] = useMutation(LOGIN);
 
   const [user, setUser] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
 
-  const handleChange = e => {
+  const [toggle, handleForgotPassword] = useHandleForgotPassword();
+
+  const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = { ...errors };
 
@@ -29,64 +41,67 @@ const Login = props => {
       variables: {
         data: {
           username: user.username,
-          password: user.password
-        }
-      }
+          password: user.password,
+        },
+      },
     });
 
     setErrors(newErrors);
   };
 
-  useEffect(
-    () => {
-      if (data) {
-        refetch();
-      }
-    },
-    [data]
-  );
+  useEffect(() => {
+    if (data) {
+      refetch();
+    }
+  }, [data]);
 
   return (
-    <Form>
-      <Input
-        type="text"
-        name="username"
-        value={user.username}
-        placeholder="user_name"
-        onChange={handleChange}
-        disabled={loading}
-      />
-      <span>
-        {errors.username}
-      </span>
-      <Input
-        type="password"
-        name="password"
-        value={user.password}
-        placeholder="password"
-        onChange={handleChange}
-        disabled={loading}
-      />
-      <span>
-        {errors.password}
-      </span>
-      {!loading &&
-        <ButtonContainer>
-          <Button type="button" onClick={() => props.setViewForm(false)}>
-            Go Back
-          </Button>
-          <Button type="submit" onClick={handleSubmit}>
-            Login
-          </Button>
-        </ButtonContainer>}
-      <PropagateLoader
-        className="spinner"
-        sizeUnit={'vh'}
-        size={10}
-        color={'#d2d2d2'}
-        loading={loading}
-      />
-    </Form>
+    <>
+      {toggle ? (
+        <SendForgotPasswordEmail handleGoBack={() => props.setViewForm(false)} />
+      ) : (
+        <Form>
+          <Input
+            type="text"
+            name="username"
+            value={user.username}
+            placeholder="user_name"
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <span>{errors.username}</span>
+          <Input
+            type="password"
+            name="password"
+            value={user.password}
+            placeholder="password"
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <span>{errors.password}</span>
+          {!loading && (
+            <ButtonContainer>
+              <Button type="button" onClick={() => props.setViewForm(false)}>
+                Go Back
+              </Button>
+              <Button type="submit" onClick={handleSubmit}>
+                Login
+              </Button>
+            </ButtonContainer>
+          )}
+          <PropagateLoader
+            className="spinner"
+            sizeUnit={"vh"}
+            size={10}
+            color={"#d2d2d2"}
+            loading={loading}
+          />
+          <ForgetButtonContainer>
+            <ForgetfulButton onClick={handleForgotPassword}>Forgot your password?</ForgetfulButton>
+          </ForgetButtonContainer>
+        </Form>
+      )}
+    </>
   );
 };
 

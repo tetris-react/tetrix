@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40vh;
+  width: 90%;
+  max-width: 320px;
   height: fit-content;
 
   margin-bottom: 1vh;
@@ -53,4 +54,23 @@ export const Button = styled.button`
     color: #cccccc;
     border: 1px solid #cccccc;
   }
+`;
+
+export const ForgetfulButton = styled.button`
+  color: white;
+  background: none;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+  &:hover {
+    color: #cccccc;
+    border-color: #cccccc;
+  }
+`;
+
+export const ForgetButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.8rem;
 `;
