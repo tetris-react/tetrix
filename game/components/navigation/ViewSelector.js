@@ -52,14 +52,14 @@ const ViewSelector = props => {
           >
             Leaderboard
           </Option>}
-        {selection !== 'Personal Board' &&
+        {selection !== 'Personal Best' &&
           session &&
           <Option
-            value="personal-board"
-            name="Personal Board"
+            value="personal-best"
+            name="Personal Best"
             onClick={handleSelection}
           >
-            Personal Board
+            Personal Best
           </Option>}
       </Options>
     </SelectionContainer>
