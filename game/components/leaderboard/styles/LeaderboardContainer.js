@@ -57,26 +57,26 @@ export const LeaderboardContainer = styled(Column)`
       }
     }
   }
+`;
 
-  table {
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 1.5vh;
+export const Table = styled.table`
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 1.8vh;
 
-    tr:first-of-type {
+  thead {
+    tr {
       border-bottom: 1px solid #fafafa;
     }
-
-    tr:nth-child(even) {
-      background-color: #212121;
-
-    }
-
-    td {
-      padding-top: 1vh;
-    }
-
-
   }
 
+  tbody {
+    tr:nth-child(even) {
+      background-color: #212121;
+    }
+
+    tr > td {
+      padding: .5vh 0;
+    }
+  }
 `;

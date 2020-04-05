@@ -52,10 +52,10 @@ const Register = props => {
       console.log(err?.graphQLErrors);
     }
 
-    setErrors(newErrors);
+    // setErrors(newErrors);
 
   };
-
+  
   useEffect(() => {
     if (data)
       refetch();

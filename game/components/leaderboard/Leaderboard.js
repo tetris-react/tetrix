@@ -1,9 +1,15 @@
 import React from 'react';
+import { useQuery } from 'react-apollo';
 import { useSelector } from 'react-redux';
+import { LEADER_BOARD } from '../../../queries';
 import { I, J, L, O, S, T, Z } from '../../assets';
+import LeaderboardTable from './LeadboardTable';
 import { LeaderboardContainer } from './styles/LeaderboardContainer';
-const Leaderboard = () => {
+
+const Leaderboard = (props) => {
+  const {data} = props;
   const { nextTetrad } = useSelector(state => state.playfield);
+
   return (
     <LeaderboardContainer>
       <div>
@@ -24,152 +30,7 @@ const Leaderboard = () => {
           {nextTetrad?.type === 'L' && <L filterID="L_b" />}
         </div>
       </div>
-      <table>
-        <tr>
-          <th>#</th>
-          <th>Player</th>
-          <th>Score</th>
-          <th>Lvl</th>
-          <th>Time</th>
-          <th>Tetris %</th>
-          <th>Date (EDT)</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>lulahemon</td>
-          <td>121850</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>halophilous</td>
-          <td>245791</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Cera53Ocelot</td>
-          <td>23451</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Vamplate</td>
-          <td>456124</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Vaudeville</td>
-          <td>24154</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Psilothrum</td>
-          <td>452136</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>Abderian</td>
-          <td>451748</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>DerpulPiolet</td>
-          <td>954126</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td>Pollent</td>
-          <td>451234</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>Hagioscope</td>
-          <td>54123</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>Orthopraxis</td>
-          <td>2315</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>12</td>
-          <td>Urbiculture</td>
-          <td>123451</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>13</td>
-          <td>Urbiculture</td>
-          <td>123451</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>14</td>
-          <td>Urbiculture</td>
-          <td>123451</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-        <tr>
-          <td>15</td>
-          <td>Urbiculture</td>
-          <td>123451</td>
-          <td>9</td>
-          <td>08:30</td>
-          <td>50 %</td>
-          <td>04-03-20 ~ 04:15:01</td>
-        </tr>
-      </table>
+      <LeaderboardTable data={data} />
     </LeaderboardContainer>
   );
 };

@@ -13,6 +13,8 @@ const LoginModal = props => {
   const [login, { data, loading, error }] = useMutation(LOGIN);
   const { loggingIn } = useSelector(state => state.game);
   const [errors, setErrors] = useState({});
+  const [loginMessage, setLoginMessage] = useState('');
+  const [loginSuccess, setLoginSuccess] = useState('');
 
   const [user, setUser] = useState({
     username: '',
@@ -30,22 +32,33 @@ const LoginModal = props => {
     dispatch(renderLoginModal(false));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let newErrors = { ...errors };
 
-    login({
-      variables: {
-        data: {
-          username: user.username,
-          password: user.password
+    try {
+      const res = await login({
+        variables: {
+          data: {
+            username: user.username,
+            password: user.password
+          }
         }
-      }
-    });
+      });
+      setLoginSuccess(res?.data?.login?.status);
+      return setLoginMessage(res?.data?.login?.message);
+      
+    } catch (err) {
+      err.graphQLErrors[0].extensions.exception.validationErrors.forEach(
+        validationError => {
+          Object.values(validationError.constraints).forEach(message => {
+            newErrors[validationError.property] = message;
+          });
+        }
+      );
+    }
 
     setErrors(newErrors);
-
-    if (!error) dispatch(renderLoginModal(false));
   };
 
   useEffect(
@@ -55,12 +68,22 @@ const LoginModal = props => {
     [data]
   );
 
+  useEffect(
+    () => {
+      if (loginSuccess) dispatch(renderLoginModal(false));
+    },
+    [loginSuccess]
+  );
+
   if (!loggingIn) return null;
 
   return (
     <ModalContainer>
       <Form>
         <h1>Login</h1>
+        <span>
+          {!loginSuccess ? loginMessage : ''}
+        </span>
         <Input
           type="text"
           name="username"
@@ -69,9 +92,7 @@ const LoginModal = props => {
           onChange={handleChange}
           disabled={loading}
         />
-        <span>
-          {errors.username}
-        </span>
+        <span>{errors?.username}</span>
         <Input
           type="password"
           name="password"
@@ -80,9 +101,7 @@ const LoginModal = props => {
           onChange={handleChange}
           disabled={loading}
         />
-        <span>
-          {errors.password}
-        </span>
+        <span>{errors?.password}</span>
         {!loading &&
           <ButtonContainer>
             <Button type="button" onClick={handleGoBack}>

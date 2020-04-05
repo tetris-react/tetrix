@@ -1,19 +1,13 @@
-import moment from 'moment-timezone';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
-import { indigo } from '@material-ui/core/colors';
 import { REGISTER } from '../../../queries';
 import { renderRegisterModal } from '../../../store';
-import Register from '../auth/Register';
 import { Button, ButtonContainer, Form, Input } from './styles';
 
-const tzName = moment.tz.guess();
-const tzAbbr = moment.tz(tzName).format('Z');
-
-const RegisterModal = (props) => {
+const UpdatePassword = (props) => {
   const { refetch } = props;
   const dispatch = useDispatch();
   const { registering } = useSelector(state => state.game);
@@ -21,8 +15,8 @@ const RegisterModal = (props) => {
   const [register, { data, loading, error }] = useMutation(REGISTER);
 
   const [user, setUser] = useState({
-    username: '',
     password: '',
+    confirm: '',
     email: ''
   });
 
@@ -65,7 +59,7 @@ const RegisterModal = (props) => {
 
     setErrors(newErrors);
 
-    
+
 
   };
 
@@ -77,7 +71,7 @@ const RegisterModal = (props) => {
   );
 
   useEffect(() => {
-    if (!error) 
+    if (!error)
       dispatch(renderRegisterModal(false));
   }, [error])
 
@@ -177,4 +171,4 @@ const ModalContainer = styled.div`
   }
 `;
 
-export default RegisterModal;
+export default UpdatePassword;
