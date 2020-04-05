@@ -1,34 +1,34 @@
-import moment from 'moment-timezone';
-import React, { useEffect, useState } from 'react';
-import {PropagateLoader} from 'react-spinners';
-import { useMutation } from '@apollo/react-hooks';
-import { REGISTER } from '../../../queries';
-import { Button, ButtonContainer, Form, Input } from './styles';
+import moment from "moment-timezone";
+import React, { useEffect, useState } from "react";
+import { PropagateLoader } from "react-spinners";
+import { useMutation } from "@apollo/react-hooks";
+import { REGISTER } from "../../../queries";
+import { Button, ButtonContainer, Form, Input } from "./styles";
 
 const tzName = moment.tz.guess();
-const tzAbbr = moment.tz(tzName).format('Z');
+const tzAbbr = moment.tz(tzName).format("Z");
 
 const initialFormState = {
-  username: '',
-  password: '',
-  email: ''
-}
+  username: "",
+  password: "",
+  email: "",
+};
 
-const Register = props => {
+const Register = (props) => {
   const { refetch } = props;
   const [errors, setErrors] = useState({});
-  const [register, {data, loading, error}] = useMutation(REGISTER);
+  const [register, { data, loading, error }] = useMutation(REGISTER);
 
   const [user, setUser] = useState(initialFormState);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleRegister = async e => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     let newErrors = {};
     try {
@@ -39,28 +39,25 @@ const Register = props => {
             password: user.password,
             email: user.email,
             tzName: tzName,
-            tzAbv: tzAbbr
-          }
-        }
-    });
+            tzAbv: tzAbbr,
+          },
+        },
+      });
     } catch (err) {
-      err.graphQLErrors[0].extensions.exception.validationErrors.forEach(
-        validationError => {
-          Object.values(validationError.constraints).forEach(message => {
-            newErrors[validationError.property] = message;
-          });
-        }
-      );
+      err.graphQLErrors[0].extensions.exception.validationErrors.forEach((validationError) => {
+        Object.values(validationError.constraints).forEach((message) => {
+          newErrors[validationError.property] = message;
+        });
+      });
       // console.log(err?.graphQLErrors);
     } finally {
       setErrors(newErrors);
     }
   };
-  
+
   useEffect(() => {
-    if (data)
-      refetch();
-  }, [data])
+    if (data) refetch();
+  }, [data]);
 
   return (
     <Form>
@@ -72,9 +69,7 @@ const Register = props => {
         onChange={handleChange}
         disabled={loading}
       />
-      <span>
-        {errors?.username}
-      </span>
+      <span>{errors?.username}</span>
       <Input
         type="password"
         name="password"
@@ -83,9 +78,7 @@ const Register = props => {
         onChange={handleChange}
         disabled={loading}
       />
-      <span>
-        {errors?.password}
-      </span>
+      <span>{errors?.password}</span>
       <Input
         type="email"
         name="email"
@@ -94,28 +87,27 @@ const Register = props => {
         onChange={handleChange}
         disabled={loading}
       />
-      <span>
-        {errors?.email}
-      </span>
-      {!loading && 
+      <span>{errors?.email}</span>
+      {!loading && (
         <>
-          <span style={{color: '#fafafa'}}>
-              Only used for password recovery, and can be updated in user settings.
+          <span style={{ color: "#fafafa" }}>
+            Only used for password recovery, and can be updated in user settings.
           </span>
           <ButtonContainer>
             <Button type="button" onClick={() => props.setViewForm(false)}>
               Go Back
             </Button>
-              <Button type="submit" onClick={handleRegister}>
-                Register
+            <Button type="submit" onClick={handleRegister}>
+              Register
             </Button>
           </ButtonContainer>
         </>
-      }
-      <PropagateLoader className="spinner"
-        sizeUnit={'vh'}
+      )}
+      <PropagateLoader
+        className="spinner"
+        sizeUnit={"vh"}
         size={10}
-        color={'#d2d2d2'}
+        color={"#d2d2d2"}
         loading={loading}
       />
     </Form>

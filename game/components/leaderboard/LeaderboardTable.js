@@ -1,10 +1,10 @@
-import moment from 'moment-timezone';
-import React, {useEffect} from 'react';
-import { useSelector } from 'react-redux';
-import { Table } from './styles/LeaderboardContainer';
+import moment from "moment-timezone";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Table } from "./styles/LeaderboardContainer";
 
-const LeadboardTable = (props) => {
-  const {data} = props;
+const LeaderboardTable = (props) => {
+  const { data } = props;
 
   return (
     <Table>
@@ -29,11 +29,11 @@ const LeadboardTable = (props) => {
               <td>{record.tetrisRate}</td>
               <td>{moment(record.date).format("YYYY-MM-DD HH:mm")}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </Table>
   );
 };
 
-export default LeadboardTable;
+export default LeaderboardTable;

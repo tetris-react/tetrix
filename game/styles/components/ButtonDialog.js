@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { restartGame, resumeGame, startGame } from '../../../store';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { restartGame, resumeGame, startGame } from "../../../store";
 
-const ButtonDialog = props => {
+const ButtonDialog = (props) => {
   const { session } = props;
   const dispatch = useDispatch();
-  const { gameStarted, gameOver, gamePaused } = useSelector(
-    state => state.game
-  );
+  const { gameStarted, gameOver, gamePaused } = useSelector((state) => state.game);
   const [open, setOpen] = useState(true);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const handleClick = () => {
     if (gameStarted === false && gameOver === false) {
@@ -25,23 +23,20 @@ const ButtonDialog = props => {
     }
   };
 
-  useEffect(
-    () => {
-      if (gameStarted === false && gameOver === false) {
-        setText('Begin');
-        setOpen(true);
-      } else if (!gamePaused && gameStarted) {
-        setOpen(false);
-      } else if (gameOver) {
-        setText('Play Again');
-        setOpen(true);
-      } else if (gamePaused) {
-        setText('Resume');
-        setOpen(true);
-      }
-    },
-    [gameStarted, gameOver, gamePaused]
-  );
+  useEffect(() => {
+    if (gameStarted === false && gameOver === false) {
+      setText("Begin");
+      setOpen(true);
+    } else if (!gamePaused && gameStarted) {
+      setOpen(false);
+    } else if (gameOver) {
+      setText("Play Again");
+      setOpen(true);
+    } else if (gamePaused) {
+      setText("Resume");
+      setOpen(true);
+    }
+  }, [gameStarted, gameOver, gamePaused]);
 
   return (
     <Container isOpen={open}>
@@ -52,13 +47,16 @@ const ButtonDialog = props => {
   );
 };
 
+// Styles did some weird things in tablet mode, so I made some changes
+
 const Button = styled.button`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
-  position: absolute;
-  margin-left: -21.5%;
-  margin-top: -30px;
-  left: 50%;
-  top: 50%;
+  display: ${(props) => (props.isOpen ? "block" : "none")};
+  // I commented these out because it's inheriting is position from it's absolutely positioned parent
+  // position: absolute;
+  // margin-left: -21.5%;
+  // margin-top: -30px;
+  // left: 50%;
+  // top: 50%;
 
   width: 25vh;
   height: 6.5vh;
@@ -78,7 +76,10 @@ const Button = styled.button`
 `;
 
 const Container = styled.div`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
+  // changed "box" to "flex" to align button in center
+  display: ${(props) => (props.isOpen ? "flex" : "none")};
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 100%;
   left: calc(100% / 3);
@@ -86,7 +87,7 @@ const Container = styled.div`
 
   height: 100%;
 
-  background: rgb(21, 21, 21, .80);
+  background: rgb(21, 21, 21, 0.8);
 `;
 
 export default ButtonDialog;

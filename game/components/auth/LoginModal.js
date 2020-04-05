@@ -1,41 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { PropagateLoader } from 'react-spinners';
-import styled from 'styled-components';
-import { useMutation } from '@apollo/react-hooks';
-import { LOGIN } from '../../../queries';
-import { renderLoginModal } from '../../../store';
-import { Button, ButtonContainer, Form, Input } from './styles';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { PropagateLoader } from "react-spinners";
+import styled from "styled-components";
+import { useMutation } from "@apollo/react-hooks";
+import { LOGIN } from "../../../queries";
+import { renderLoginModal } from "../../../store";
+import SendForgotPasswordEmail from "./SendForgotPasswordEmail";
+import { useHandleForgotPassword } from "../../hooks";
+import {
+  Button,
+  ButtonContainer,
+  Form,
+  Input,
+  ForgetfulButton,
+  ForgetButtonContainer,
+} from "./styles";
 
 const initialFormState = {
-  username: '',
-  password: ''
-}
+  username: "",
+  password: "",
+};
 
-const LoginModal = props => {
+const LoginModal = (props) => {
   const { refetch, refetchLeaderBoard } = props;
   const dispatch = useDispatch();
   const [login, { data, loading, error }] = useMutation(LOGIN);
-  const { loggingIn } = useSelector(state => state.game);
+  const { loggingIn } = useSelector((state) => state.game);
   const [errors, setErrors] = useState({});
-  const [loginMessage, setLoginMessage] = useState('');
-  const [loginSuccess, setLoginSuccess] = useState('');
+  const [loginMessage, setLoginMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState("");
+
+  const [toggle, handleForgotPassword] = useHandleForgotPassword();
 
   const [user, setUser] = useState(initialFormState);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleGoBack = e => {
+  const handleGoBack = (e) => {
     dispatch(renderLoginModal(false));
-    setUser(initialFormState)
+    setUser(initialFormState);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = {};
 
@@ -44,89 +55,86 @@ const LoginModal = props => {
         variables: {
           data: {
             username: user.username,
-            password: user.password
-          }
-        }
+            password: user.password,
+          },
+        },
       });
       setLoginSuccess(res?.data?.login?.status);
       return setLoginMessage(res?.data?.login?.message);
-      
     } catch (err) {
-      err.graphQLErrors[0].extensions.exception.validationErrors.forEach(
-        validationError => {
-          Object.values(validationError.constraints).forEach(message => {
-            newErrors[validationError.property] = message;
-          });
-        }
-      );
+      err.graphQLErrors[0].extensions.exception.validationErrors.forEach((validationError) => {
+        Object.values(validationError.constraints).forEach((message) => {
+          newErrors[validationError.property] = message;
+        });
+      });
     } finally {
       setErrors(newErrors);
-      setUser(initialFormState)
+      setUser(initialFormState);
     }
   };
 
-  useEffect(
-    () => {
-      if (data) refetch();
-    },
-    [data]
-  );
+  useEffect(() => {
+    if (data) refetch();
+  }, [data]);
 
-  useEffect(
-    () => {
-      if (loginSuccess) {
-        refetchLeaderBoard()
-        dispatch(renderLoginModal(false));
-        setUser(initialFormState);
-      } 
-    },
-    [loginSuccess, refetchLeaderBoard, dispatch]
-  );
+  useEffect(() => {
+    if (loginSuccess) {
+      refetchLeaderBoard();
+      dispatch(renderLoginModal(false));
+      setUser(initialFormState);
+    }
+  }, [loginSuccess, refetchLeaderBoard, dispatch]);
 
   if (!loggingIn) return null;
 
   return (
     <ModalContainer>
-      <Form>
-        <h1>Login</h1>
-        <span>
-          {!loginSuccess ? loginMessage : ''}
-        </span>
-        <Input
-          type="text"
-          name="username"
-          value={user.username}
-          placeholder="user_name"
-          onChange={handleChange}
-          disabled={loading}
-        />
-        <span>{errors?.username}</span>
-        <Input
-          type="password"
-          name="password"
-          value={user.password}
-          placeholder="password"
-          onChange={handleChange}
-          disabled={loading}
-        />
-        <span>{errors?.password}</span>
-        {!loading &&
-          <ButtonContainer>
-            <Button type="button" onClick={handleGoBack}>
-              Go Back
-            </Button>
-            <Button type="submit" onClick={handleSubmit}>
-              Login
-            </Button>
-          </ButtonContainer>}
-        <PropagateLoader
-          className="spinner"
-          sizeUnit={'vh'}
-          size={10}
-          color={'#d2d2d2'}
-          loading={loading}
-        />
-      </Form>
+      {toggle ? (
+        <SendForgotPasswordEmail handleGoBack={handleGoBack} />
+      ) : (
+        <Form>
+          <h1>Login</h1>
+          <span>{!loginSuccess ? loginMessage : ""}</span>
+          <Input
+            type="text"
+            name="username"
+            value={user.username}
+            placeholder="user_name"
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <span>{errors.username}</span>
+          <Input
+            type="password"
+            name="password"
+            value={user.password}
+            placeholder="password"
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <span>{errors.password}</span>
+          {!loading && (
+            <ButtonContainer>
+              <Button type="button" onClick={handleGoBack}>
+                Go Back
+              </Button>
+              <Button type="submit" onClick={handleSubmit}>
+                Login
+              </Button>
+            </ButtonContainer>
+          )}
+          <PropagateLoader
+            className="spinner"
+            sizeUnit={"vh"}
+            size={10}
+            color={"#d2d2d2"}
+            loading={loading}
+          />
+          <ForgetButtonContainer>
+            <ForgetfulButton onClick={handleForgotPassword}>Forgot your password?</ForgetfulButton>
+          </ForgetButtonContainer>
+        </Form>
+      )}
     </ModalContainer>
   );
 };
@@ -140,6 +148,7 @@ const ModalContainer = styled.div`
   width: 100%;
   left: calc(100% / 3);
   max-width: calc(100% / 3);
+  color: white;
 
   height: 100%;
 
@@ -147,7 +156,7 @@ const ModalContainer = styled.div`
 
   form {
     h1 {
-      font-size: 3.0vh;
+      font-size: 3vh;
       text-align: center;
       color: #fafafa;
     }

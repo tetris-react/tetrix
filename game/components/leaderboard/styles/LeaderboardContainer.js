@@ -1,24 +1,23 @@
-import styled from 'styled-components';
-import { Column } from '../../../styles';
+import styled from "styled-components";
+import { Column } from "../../../styles";
 
 export const LeaderboardContainer = styled(Column)`
-
   padding: 8vh 4vh;
-  font-size: 3.0vh;
-  color: #FAFAFA;
+  font-size: 3vh;
+  color: #fafafa;
 
   div {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
-    
+
     div {
       height: 7vh;
     }
 
     span {
-      margin-bottom: -.5vh;
+      margin-bottom: -0.5vh;
     }
 
     hr {
@@ -33,16 +32,20 @@ export const LeaderboardContainer = styled(Column)`
     width: 100%;
 
     div.next-tetrad {
-      margin-left: -5.5vh;
-      width: 50%;
-      height: 14.5vh;
-      min-height: 14.5vh;
+      margin-right: 5.5vh;
+      // width: 50%;
+      // height: 14.5vh;
+      // min-height: 14.5vh;
+      svg {
+        width: 13vw;
+        height: auto;
+      }
     }
 
-    span {
-      margin-bottom: 3vh;
-    }
-    
+    // span {
+    //   margin-bottom: 3vh;
+    // }
+
     div {
       display: flex;
       flex-direction: column;
@@ -76,7 +79,7 @@ export const Table = styled.table`
     }
 
     tr > td {
-      padding: .5vh 0;
+      padding: 0.5vh 0;
     }
   }
 `;

@@ -1,12 +1,8 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  NormalizedCacheObject
-} from 'apollo-boost';
-import { setContext } from 'apollo-link-context';
-import { createHttpLink } from 'apollo-link-http';
-import fetch from 'isomorphic-unfetch';
-import { isBrowser } from './isBrowser';
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from "apollo-boost";
+import { setContext } from "apollo-link-context";
+import { createHttpLink } from "apollo-link-http";
+import fetch from "isomorphic-unfetch";
+import { isBrowser } from "./isBrowser";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
@@ -22,8 +18,8 @@ interface Options {
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
     // uri: 'http://localhost:4000/graphql',
-    uri: 'https://tetris-back-end.herokuapp.com/graphql',
-    credentials: 'include'
+    uri: "https://tetris-back-end.herokuapp.com/graphql",
+    credentials: "include",
   });
 
   const authLink = setContext((_, { headers }) => {
@@ -31,8 +27,8 @@ function create(initialState: any, { getToken }: Options) {
     return {
       headers: {
         ...headers,
-        cookie: token ? `qid=${token}` : ''
-      }
+        cookie: token ? `qid=${token}` : "",
+      },
     };
   });
 
@@ -41,7 +37,7 @@ function create(initialState: any, { getToken }: Options) {
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser, // Disables forceFetch on the server (so queries are only run once)
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache().restore(initialState || {})
+    cache: new InMemoryCache().restore(initialState || {}),
   });
 }
 

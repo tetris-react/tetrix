@@ -1,31 +1,28 @@
-import styled from 'styled-components';
-import { Column } from '../../../styles';
+import styled from "styled-components";
+import { Column } from "../../../styles";
 
 export const StatisticsContainer = styled(Column)`
-
   padding: 8vh 4vh;
-  font-size: 3.0vh;
-  color: #FAFAFA;
-
+  font-size: 3vh;
+  color: #fafafa;
   div {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
-    
+
     div {
       height: 7vh;
     }
 
     span {
-      margin-bottom: -.5vh;
+      margin-bottom: -0.5vh;
     }
 
     hr {
       width: 100%;
     }
   }
-  
 
   div:last-of-type {
     flex-direction: row;
@@ -61,5 +58,4 @@ export const StatisticsContainer = styled(Column)`
       }
     }
   }
-
 `;
