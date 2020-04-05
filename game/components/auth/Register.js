@@ -8,16 +8,18 @@ import { Button, ButtonContainer, Form, Input } from './styles';
 const tzName = moment.tz.guess();
 const tzAbbr = moment.tz(tzName).format('Z');
 
+const initialFormState = {
+  username: '',
+  password: '',
+  email: ''
+}
+
 const Register = props => {
   const { refetch } = props;
   const [errors, setErrors] = useState({});
   const [register, {data, loading, error}] = useMutation(REGISTER);
 
-  const [user, setUser] = useState({
-    username: '',
-    password: '',
-    email: ''
-  });
+  const [user, setUser] = useState(initialFormState);
 
   const handleChange = e => {
     setUser({
@@ -28,7 +30,7 @@ const Register = props => {
 
   const handleRegister = async e => {
     e.preventDefault();
-    let newErrors = { ...errors };
+    let newErrors = {};
     try {
       await register({
         variables: {
@@ -49,13 +51,12 @@ const Register = props => {
           });
         }
       );
-      console.log(err?.graphQLErrors);
+      // console.log(err?.graphQLErrors);
+    } finally {
+      setErrors(newErrors);
     }
-
-    setErrors(newErrors);
-
   };
-
+  
   useEffect(() => {
     if (data)
       refetch();
@@ -72,7 +73,7 @@ const Register = props => {
         disabled={loading}
       />
       <span>
-        {errors.username}
+        {errors?.username}
       </span>
       <Input
         type="password"
@@ -83,7 +84,7 @@ const Register = props => {
         disabled={loading}
       />
       <span>
-        {errors.password}
+        {errors?.password}
       </span>
       <Input
         type="email"
@@ -93,10 +94,13 @@ const Register = props => {
         onChange={handleChange}
         disabled={loading}
       />
+      <span>
+        {errors?.email}
+      </span>
       {!loading && 
         <>
-          <span>
-              Only used for password reset, and can be updated in user settings.
+          <span style={{color: '#fafafa'}}>
+              Only used for password recovery, and can be updated in user settings.
           </span>
           <ButtonContainer>
             <Button type="button" onClick={() => props.setViewForm(false)}>

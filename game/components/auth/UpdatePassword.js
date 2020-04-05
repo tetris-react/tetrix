@@ -3,25 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
-import { LOGIN } from '../../../queries';
-import { renderLoginModal } from '../../../store';
+import { REGISTER } from '../../../queries';
+import { renderRegisterModal } from '../../../store';
 import { Button, ButtonContainer, Form, Input } from './styles';
 
-const initialFormState = {
-  username: '',
-  password: ''
-}
-
-const LoginModal = props => {
+const UpdatePassword = (props) => {
   const { refetch } = props;
   const dispatch = useDispatch();
-  const [login, { data, loading, error }] = useMutation(LOGIN);
-  const { loggingIn } = useSelector(state => state.game);
+  const { registering } = useSelector(state => state.game);
   const [errors, setErrors] = useState({});
-  const [loginMessage, setLoginMessage] = useState('');
-  const [loginSuccess, setLoginSuccess] = useState('');
+  const [register, { data, loading, error }] = useMutation(REGISTER);
 
-  const [user, setUser] = useState(initialFormState);
+  const [user, setUser] = useState({
+    password: '',
+    confirm: '',
+    email: ''
+  });
 
   const handleChange = e => {
     setUser({
@@ -31,26 +28,24 @@ const LoginModal = props => {
   };
 
   const handleGoBack = e => {
-    dispatch(renderLoginModal(false));
-    setUser(initialFormState)
+    dispatch(renderRegisterModal(false));
   };
 
-  const handleSubmit = async e => {
+  const handleRegister = async e => {
     e.preventDefault();
-    let newErrors = {};
-
+    let newErrors = { ...errors };
     try {
-      const res = await login({
+      await register({
         variables: {
           data: {
             username: user.username,
-            password: user.password
+            password: user.password,
+            email: user.email,
+            tzName: tzName,
+            tzAbv: tzAbbr
           }
         }
       });
-      setLoginSuccess(res?.data?.login?.status);
-      return setLoginMessage(res?.data?.login?.message);
-      
     } catch (err) {
       err.graphQLErrors[0].extensions.exception.validationErrors.forEach(
         validationError => {
@@ -59,10 +54,13 @@ const LoginModal = props => {
           });
         }
       );
-    } finally {
-      setErrors(newErrors);
-      setUser(initialFormState)
+      console.log(err?.graphQLErrors);
     }
+
+    setErrors(newErrors);
+
+
+
   };
 
   useEffect(
@@ -72,27 +70,17 @@ const LoginModal = props => {
     [data]
   );
 
-  useEffect(
-    () => {
-      if (loginSuccess) {
-        dispatch(renderLoginModal(false));
-        setUser(initialFormState);
-      } 
-    },
-    [loginSuccess]
-  );
+  useEffect(() => {
+    if (!error)
+      dispatch(renderRegisterModal(false));
+  }, [error])
 
-  console.log("errors", errors);
-
-  if (!loggingIn) return null;
+  if (!registering) return null;
 
   return (
     <ModalContainer>
       <Form>
-        <h1>Login</h1>
-        <span>
-          {!loginSuccess ? loginMessage : ''}
-        </span>
+        <h1>Register</h1>
         <Input
           type="text"
           name="username"
@@ -101,7 +89,9 @@ const LoginModal = props => {
           onChange={handleChange}
           disabled={loading}
         />
-        <span>{errors?.username}</span>
+        <span>
+          {errors.username}
+        </span>
         <Input
           type="password"
           name="password"
@@ -110,18 +100,33 @@ const LoginModal = props => {
           onChange={handleChange}
           disabled={loading}
         />
-        <span>{errors?.password}</span>
+        <span>
+          {errors.password}
+        </span>
+        <Input
+          type="email"
+          name="email"
+          value={user.email}
+          placeholder="email (optional)"
+          onChange={handleChange}
+          disabled={loading}
+        />
         {!loading &&
-          <ButtonContainer>
-            <Button type="button" onClick={handleGoBack}>
-              Go Back
-            </Button>
-            <Button type="submit" onClick={handleSubmit}>
-              Login
-            </Button>
-          </ButtonContainer>}
-        <PropagateLoader
-          className="spinner"
+          <>
+            <span>
+              Only used for password reset, and can be updated in user settings.
+            </span>
+            <ButtonContainer>
+              <Button type="button" onClick={handleGoBack}>
+                Go Back
+              </Button>
+              <Button type="submit" onClick={handleRegister}>
+                Register
+              </Button>
+            </ButtonContainer>
+          </>
+        }
+        <PropagateLoader className="spinner"
           sizeUnit={'vh'}
           size={10}
           color={'#d2d2d2'}
@@ -133,10 +138,11 @@ const LoginModal = props => {
 };
 
 const ModalContainer = styled.div`
-  display: flex;
+  display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   position: absolute;
   width: 100%;
   left: calc(100% / 3);
@@ -152,7 +158,17 @@ const ModalContainer = styled.div`
       text-align: center;
       color: #fafafa;
     }
+
+    div {
+      font-size: 1.8vh;
+      text-align: center;
+      color: #fafafa;
+
+      p:last-of-type {
+        font-size:1.2vh;
+      }
+    }
   }
 `;
 
-export default LoginModal;
+export default UpdatePassword;
