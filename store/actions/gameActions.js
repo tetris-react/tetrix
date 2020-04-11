@@ -114,7 +114,8 @@ export const calculateScore = () => (dispatch, state) => {
   score += points * (level + 1) + rowsSkipped;
   level += rowsCleared >= level * 10 + 10 ? 1 : 0;
 
-  tetrisRate = roundTwoDecimals(tetrisNum * 4 / rowsCleared);
+  tetrisRate = roundTwoDecimals(tetrisNum * 4 / rowsCleared * 100);
+  console.log('tetrisRate', tetrisRate);
   burn = numRows < 4 ? burn + numRows : 0;
 
   dispatch({

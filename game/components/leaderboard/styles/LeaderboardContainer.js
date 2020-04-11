@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Column } from "../../../styles";
+import styled from 'styled-components';
+import { Column } from '../../../styles';
 
 export const LeaderboardContainer = styled(Column)`
   padding: 8vh 4vh;
@@ -32,19 +32,18 @@ export const LeaderboardContainer = styled(Column)`
     width: 100%;
 
     div.next-tetrad {
-      margin-right: 5.5vh;
-      // width: 50%;
-      // height: 14.5vh;
-      // min-height: 14.5vh;
+      width: 50%;
+      height: 14.5vh;
+      min-height: 14.5vh;
       svg {
         width: 13vw;
         height: auto;
       }
     }
 
-    // span {
-    //   margin-bottom: 3vh;
-    // }
+    span {
+      margin-bottom: 3vh;
+    }
 
     div {
       display: flex;

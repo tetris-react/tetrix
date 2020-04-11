@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Input, Button, Form } from "../../auth/styles";
-import styled from "styled-components";
-import { useMutation } from "@apollo/react-hooks";
-import { FORGOT_PASSWORD_EMAIL } from "./query";
 import { useForm } from "react-hook-form";
 import { PropagateLoader } from "react-spinners";
+import styled from "styled-components";
+import { useMutation } from "@apollo/react-hooks";
+import { Button, Form, Input } from "../../auth/styles";
+import { FORGOT_PASSWORD_EMAIL } from "./query";
 
 export default function SendForgotPassword({ handleGoBack }) {
   const [message, setMessage] = useState(null);
@@ -22,7 +22,8 @@ export default function SendForgotPassword({ handleGoBack }) {
   };
   return (
     <SendForgotPasswordWrapper>
-      <h2>What's your email?</h2>
+      <p>Enter your email and we'll
+      send you a link to update your password:</p>
       {console.log(message)}
       <p>{message ? message : null}</p>
 
@@ -30,7 +31,7 @@ export default function SendForgotPassword({ handleGoBack }) {
         <Input
           type="text"
           name="email"
-          placeholder="Please enter your accounts email"
+          placeholder="email address"
           ref={register}
         />
         <div className="flex">
@@ -56,13 +57,20 @@ const SendForgotPasswordWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
-  h2 {
-    font-size: 2.2vh;
-  }
   p {
     font-size: 1.8vh;
     text-align: center;
+    width: 30vh;
   }
+
+  input {
+    width: 30vh;
+  }
+
+  form {
+    margin-top: -4vh;
+  }
+
   .flex {
     display: flex;
     justify-content: space-around;
