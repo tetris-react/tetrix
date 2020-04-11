@@ -28,7 +28,7 @@ const PersonalBestTable = props => {
               <td>{record.score}</td>
               <td>{record.level}</td>
               <td>{record.tetrisRate}</td>
-              <td>{moment(record.date).format("YYYY-MM-DD HH:mm")}</td>
+              <td>{moment.unix(Number(record.date) / 1000).utc().format("YYYY-MM-DD ~ HH:ss")}</td>
             </tr>
           )
         })}

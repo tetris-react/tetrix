@@ -55,11 +55,11 @@ const ScoreBoard = () => {
         <div>
           <span>Tetris Rate</span>
           <span>
-            {tetrisRate * 100}%
+            {tetrisRate}
           </span>
         </div>
         <div>
-          <span>Burn Rate</span>
+          <span>Burn</span>
           <span>
             {burn}
           </span>

@@ -16,6 +16,7 @@ import {
 const initialState = {
   loggingIn: false,
   registering: false,
+  resettingPassword: false,
   gameStarted: false,
   gamePaused: false,
   gameOver: false,
