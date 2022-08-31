@@ -27,7 +27,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
     "isomorphic-unfetch": "^3.0.0",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "next": "latest",
     "next-routes": "^1.4.2",
     "normalize.css": "^8.0.1",
